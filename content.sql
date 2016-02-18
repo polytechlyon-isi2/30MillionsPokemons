@@ -18,5 +18,20 @@ INSERT INTO Users VALUES ('Mélan', '123', 'Dubreuil', 'Mélanie', 'mel@yopmail.
 INSERT INTO Users VALUES ('infoRPZ', '123', 'Vivies', 'Alexandre', 'info@yopmail.com', 'adresse', 0);
 
 /* ADD HISTORIQUE */
-INSERT INTO Historiques VALUES ('Sachouw', 10, '22/10/2015', 1);
-INSERT INTO Historiques VALUES ('Sachouw', 1, '22/10/2015', 1);
+INSERT INTO Historiques VALUES ('Sachouw', 10, '', 1);
+INSERT INTO Historiques VALUES ('Sachouw', 1, '', 1);
+INSERT INTO Historiques VALUES ('Yoyolan', 6, '', 1);
+
+/* ADD TYPES */
+INSERT INTO Types VALUES (1, 'plante');
+INSERT INTO Types VALUES (1, 'poison');
+INSERT INTO Types VALUES (2, 'feu');
+INSERT INTO Types VALUES (3, 'feu');
+INSERT INTO Types VALUES (4, 'eau');
+INSERT INTO Types VALUES (5, 'psy');
+INSERT INTO Types VALUES (6, 'eau');
+INSERT INTO Types VALUES (7, 'ténèbre');
+INSERT INTO Types VALUES (8, 'poison');
+INSERT INTO Types VALUES (9, 'vol');
+INSERT INTO Types VALUES (9, 'normal');
+INSERT INTO Types VALUES (10, 'electrique');
