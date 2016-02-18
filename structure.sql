@@ -33,9 +33,9 @@ REFERENCES Users(login),
 REFERENCES Pokemons(idpkm)
 ) engine=innodb character set utf8 collate utf8_unicode_ci;
 
-create table (
+create table Types(
     idpkm integer not null,
-    type ENUM('acier','combat','dragon','eau','electrique','fee','feu','glace','insecte','normal','plante','poison','psy','roche','sol','spectre','tenebre','vol'),
+    type ENUM ('acier','combat','dragon','eau','electrique','fee','feu','glace','insecte','normal','plante','poison','psy','roche','sol','spectre','tenebre','vol'),
     PRIMARY KEY (idpkm, type),
     CONSTRAINT fk_idpkmType FOREIGN KEY (idpkm)
 REFERENCES Pokemons(idpkm)    
