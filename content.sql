@@ -18,3 +18,5 @@ INSERT INTO Users VALUES ('Mélan', '123', 'Dubreuil', 'Mélanie', 'mel@yopmail.
 INSERT INTO Users VALUES ('infoRPZ', '123', 'Vivies', 'Alexandre', 'info@yopmail.com', 'adresse', 0);
 
 /* ADD HISTORIQUE */
+INSERT INTO Historiques VALUES ('Sachouw', 10, '22/10/2015', 1);
+INSERT INTO Historiques VALUES ('Sachouw', 1, '22/10/2015', 1);
