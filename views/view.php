@@ -21,13 +21,11 @@
                 <br>
                 <ul class="list-group">
 
-                    <?php foreach ($articles as $article): ?>
-                    <li class="list-group-item">
-                        <article>
-                            <h2><?php echo $article['nom_pkm'] ?></h2>
-                            <p><?php echo $article['description'] ?></p>
-                        </article>
-                    </li>
+                    <?php foreach ($pokemons as $pokemon): ?>
+                    <article>
+                        <h2><?php echo $pokemon->getName() ?></h2>
+                        <p><?php echo $pokemon->getDescription() ?></p>
+                    </article>
                     <?php endforeach ?>
 
                 </ul>

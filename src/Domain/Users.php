@@ -1,6 +1,6 @@
 <?php
 
-namespace 30MillionsPokemons\Domain;
+namespace MillionsPokemons\Domain;
 
 class Users
 {

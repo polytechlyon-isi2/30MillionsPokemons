@@ -1,9 +1,8 @@
 <?php
 
 // Home page
-$app->get('/', function () {
-    require '../src/model.php';
-    $articles = getArticles();
+$app->get('/', function () use ($app) {
+    $pokemons = $app['dao.pokemons']->findAll();
 
     ob_start();             // start buffering HTML output
     require '../views/view.php';

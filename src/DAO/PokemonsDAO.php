@@ -1,9 +1,9 @@
 <?php
 
-namespace 30MillionsPokemons\DAO;
+namespace MillionsPokemons\DAO;
 
 use Doctrine\DBAL\Connection;
-use 30MillionsPokemons\Domain\Pokemons;
+use MillionsPokemons\Domain\Pokemons;
 
 class PokemonsDAO
 {
