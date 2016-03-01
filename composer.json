@@ -4,6 +4,6 @@
         "doctrine/dbal": "2.5.*"
     },
     "autoload": {
-        "psr-4": {"30MillionsPokemons\\": "src"}
+        "psr-4": {"MillionsPokemons\\": "src"}
     }
 }

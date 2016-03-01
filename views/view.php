@@ -21,7 +21,7 @@
                 <br>
                 <ul class="list-group">
 
-                    <?php foreach ($pokemon as $pokemons): ?>
+                    <?php foreach ($pokemons as $pokemon): ?>
                     <article>
                         <h2><?php echo $pokemon->getName() ?></h2>
                         <p><?php echo $pokemon->getDescription() ?></p>
