@@ -2,6 +2,7 @@ drop table if exists Pokemons;
 drop table if exists Users;
 drop table if exists Historiques;
 drop table if exists Types;
+drop table if exists TypesPokemons;
 
 create table Pokemons (
     idpkm integer not null primary key auto_increment,
@@ -34,11 +35,18 @@ REFERENCES Users(login),
 REFERENCES Pokemons(idpkm)
 ) engine=innodb character set utf8 collate utf8_unicode_ci;
 
-create table Types(
+create table Types (
+    codeType varchar(100) not null primary key,
+    type varchar(100)
+) engine=innodb character set utf8 collate utf8_unicode_ci;
+
+create table TypesPokemons (
     idpkm integer not null,
-    type ENUM ('acier','combat','dragon','eau','electrique','fee','feu','glace','insecte','normal','plante','poison','psy','roche','sol','spectre','tenebre','vol'),
+    type varchar(100) not null,
     PRIMARY KEY (idpkm, type),
-    CONSTRAINT fk_idpkmType FOREIGN KEY (idpkm)
-REFERENCES Pokemons(idpkm)    
+    CONSTRAINT fk_idpkmTypesPokemons FOREIGN KEY (idpkm)
+REFERENCES Pokemons(idpkm),
+    CONSTRAINT fk_typeTypesPokemons FOREIGN KEY (type)
+REFERENCES Types(codeType)
 ) engine=innodb character set utf8 collate utf8_unicode_ci;
 

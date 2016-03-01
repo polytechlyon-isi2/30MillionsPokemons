@@ -23,15 +23,35 @@ INSERT INTO Historiques VALUES (2, 'Sachouw', 1, '', 1);
 INSERT INTO Historiques VALUES (3, 'Yoyolan', 6, '', 1);
 
 /* ADD TYPES */
-INSERT INTO Types VALUES (1, 'plante');
-INSERT INTO Types VALUES (1, 'poison');
-INSERT INTO Types VALUES (2, 'feu');
-INSERT INTO Types VALUES (3, 'feu');
-INSERT INTO Types VALUES (4, 'eau');
-INSERT INTO Types VALUES (5, 'psy');
-INSERT INTO Types VALUES (6, 'eau');
-INSERT INTO Types VALUES (7, 'ténèbre');
-INSERT INTO Types VALUES (8, 'poison');
-INSERT INTO Types VALUES (9, 'vol');
-INSERT INTO Types VALUES (9, 'normal');
-INSERT INTO Types VALUES (10, 'electrique');
+INSERT INTO Types VALUES ('ACIER','acier');
+INSERT INTO Types VALUES ('CBT','combat');
+INSERT INTO Types VALUES ('DRG','dragon');
+INSERT INTO Types VALUES ('EAU','eau'); 
+INSERT INTO Types VALUES ('EKT','electrique'); 
+INSERT INTO Types VALUES ('FEE','fee');
+INSERT INTO Types VALUES ('FEU','feu');
+INSERT INTO Types VALUES ('GLC','glace');
+INSERT INTO Types VALUES ('INSCT','insecte');
+INSERT INTO Types VALUES ('NRML','normal');
+INSERT INTO Types VALUES ('PLT','plante');
+INSERT INTO Types VALUES ('PSN','poison');
+INSERT INTO Types VALUES ('PSY','psy');
+INSERT INTO Types VALUES ('RCH','roche');
+INSERT INTO Types VALUES ('SOL','sol');
+INSERT INTO Types VALUES ('SPCTR','spectre');
+INSERT INTO Types VALUES ('TNBRE','tenebre');
+INSERT INTO Types VALUES ('VOL','vol');
+
+/* ADD Types for Pokemons */
+INSERT INTO TypesPokemons VALUES (1, 'PLT');
+INSERT INTO TypesPokemons VALUES (1, 'PSN');
+INSERT INTO TypesPokemons VALUES (2, 'FEU');
+INSERT INTO TypesPokemons VALUES (3, 'FEU');
+INSERT INTO TypesPokemons VALUES (4, 'EAU');
+INSERT INTO TypesPokemons VALUES (5, 'PSY');
+INSERT INTO TypesPokemons VALUES (6, 'EAU');
+INSERT INTO TypesPokemons VALUES (7, 'TNBRE');
+INSERT INTO TypesPokemons VALUES (8, 'PSN');
+INSERT INTO TypesPokemons VALUES (9, 'VOL');
+INSERT INTO TypesPokemons VALUES (9, 'NRML');
+INSERT INTO TypesPokemons VALUES (10, 'EKT');
