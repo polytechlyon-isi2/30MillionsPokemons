@@ -18,9 +18,9 @@ INSERT INTO Users VALUES ('Mélan', '123', 'Dubreuil', 'Mélanie', 'mel@yopmail.
 INSERT INTO Users VALUES ('infoRPZ', '123', 'Vivies', 'Alexandre', 'info@yopmail.com', 'adresse', 0);
 
 /* ADD HISTORIQUE */
-INSERT INTO Historiques VALUES ('Sachouw', 10, '', 1);
-INSERT INTO Historiques VALUES ('Sachouw', 1, '', 1);
-INSERT INTO Historiques VALUES ('Yoyolan', 6, '', 1);
+INSERT INTO Historiques VALUES (1, 'Sachouw', 10, '', 1);
+INSERT INTO Historiques VALUES (2, 'Sachouw', 1, '', 1);
+INSERT INTO Historiques VALUES (3, 'Yoyolan', 6, '', 1);
 
 /* ADD TYPES */
 INSERT INTO Types VALUES (1, 'plante');

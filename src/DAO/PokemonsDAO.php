@@ -5,24 +5,9 @@ namespace MillionsPokemons\DAO;
 use Doctrine\DBAL\Connection;
 use MillionsPokemons\Domain\Pokemons;
 
-class PokemonsDAO
+class PokemonsDAO extends DAO
 {
-    /**
-     * Database connection
-     *
-     * @var \Doctrine\DBAL\Connection
-     */
-    private $db;
-
-    /**
-     * Constructor
-     *
-     * @param \Doctrine\DBAL\Connection The database connection object
-     */
-    public function __construct(Connection $db) {
-        $this->db = $db;
-    }
-
+    
     /**
      * Return a list of all pokemons, sorted by name.
      *
@@ -30,13 +15,13 @@ class PokemonsDAO
      */
     public function findAll() {
         $sql = "select * from Pokemons order by nom_pkm desc";
-        $result = $this->db->fetchAll($sql);
+        $result = $this->getDb()->fetchAll($sql);
         
         // Convert query result to an array of domain objects
         $pokemons = array();
         foreach ($result as $row) {
             $pokemonsId = $row['idpkm'];
-            $pokemons[$pokemonsId] = $this->buildPokemon($row);
+            $pokemons[$pokemonsId] = $this->buildDomainObject($row);
         }
         return $pokemons;
     }
@@ -47,7 +32,7 @@ class PokemonsDAO
      * @param array $row The DB row containing Pokemons data.
      * @return \30MillionsPokemons\Domain\Pokemons
      */
-    private function buildPokemon(array $row) {
+    protected function buildDomainObject($row) {
         $pokemon = new Pokemons();
         $pokemon->setId($row['idpkm']);
         $pokemon->setName($row['nom_pkm']);

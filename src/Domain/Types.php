@@ -6,11 +6,11 @@ class Types
 {
 
     /**
-     * Pokemon id
+     * Pokemon
      *
-     * @var integer
+     * @var \MillionsPokemons\Domain\Pokemons
      */
-    private $idpkm;
+    private $pkm;
 
     /**
      * Pokemon type
@@ -19,12 +19,12 @@ class Types
      */
     private $type;
     
-    public function getIdpkm() {
-        return $this->idpkm;
+    public function getPkm() {
+        return $this->pkm;
     }
 
-    public function setIdpkm($idpkm) {
-        $this->idpkm = $idpkm;
+    public function setPkm($pkm) {
+        $this->pkm = $pkm;
     }
 
     public function getType() {

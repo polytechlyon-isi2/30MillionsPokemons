@@ -5,18 +5,25 @@ namespace MillionsPokemons\Domain;
 class Historiques
 {
     /**
+     * Purchase Id
+     *
+     * @var integer
+     */
+    private $historiqueId;
+    
+    /**
      * User login
      *
-     * @var string
+     * @var \MillionsPokemons\Domain\Users
      */
-    private $login;
+    private $user;
 
     /**
      * Pokemon id
      *
-     * @var integer
+     * @var \MillionsPokemons\Domain\Pokemons
      */
-    private $idpkm;
+    private $pkm;
 
     /**
      * Purchase date
@@ -32,20 +39,29 @@ class Historiques
      */
     private $qteAchat;
     
-    public function getLogin() {
-        return $this->login;
+    public function getHistoriqueId() {
+        return $this->historiqueId;
     }
 
-    public function setLogin($login) {
-        $this->login = $login;
+    public function setHistoriqueId($id) {
+        $this->historiqueId = $id;
     }
     
-    public function getIdpkm() {
-        return $this->idpkm;
+    
+    public function getUser() {
+        return $this->user;
     }
 
-    public function setIdpkm($idpkm) {
-        $this->idpkm = $idpkm;
+    public function setUser($user) {
+        $this->user = $user;
+    }
+    
+    public function getPkm() {
+        return $this->pkm;
+    }
+
+    public function setPkm($pkm) {
+        $this->pkm = $pkm;
     }
 
     public function getDate() {

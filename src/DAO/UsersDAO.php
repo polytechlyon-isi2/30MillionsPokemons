@@ -5,24 +5,9 @@ namespace MillionsPokemons\DAO;
 use Doctrine\DBAL\Connection;
 use MillionsPokemons\Domain\Users;
 
-class UsersDAO
+class UsersDAO extends DAO
 {
-    /**
-     * Database connection
-     *
-     * @var \Doctrine\DBAL\Connection
-     */
-    private $db;
-
-    /**
-     * Constructor
-     *
-     * @param \Doctrine\DBAL\Connection The database connection object
-     */
-    public function __construct(Connection $db) {
-        $this->db = $db;
-    }
-
+    
     /**
      * Return a list of all users, sorted by name.
      *
@@ -30,13 +15,13 @@ class UsersDAO
      */
     public function findAll() {
         $sql = "select * from Users order by nom desc";
-        $result = $this->db->fetchAll($sql);
+        $result = $this->getDb->fetchAll($sql);
 
         // Convert query result to an array of domain objects
         $user = array();
         foreach ($result as $row) {
             $userId = $row['login'];
-            $user[$userId] = $this->buildUser($row);
+            $user[$userId] = $this->buildDomainObject($row);
         }
         return $user;
     }
@@ -47,7 +32,7 @@ class UsersDAO
      * @param array $row The DB row containing user data.
      * @return \30MillionsPokemons\Domain\Users
      */
-    private function buildUser(array $row) {
+    protected function buildDomainObject($row) {
         $user = new Users();
         $user->setLogin($row['login']);
         $user->setPassword($row['mdp']);

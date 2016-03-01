@@ -22,11 +22,12 @@ create table Users (
 ) engine=innodb character set utf8 collate utf8_unicode_ci;
 
 create table Historiques (
+    historiqueId integer not null auto_increment,
     login varchar(100) not null,
     idpkm integer not null,
     dateAchat date not null,
     qteAchat integer not null,
-    PRIMARY KEY (login, idpkm, dateAchat),
+    PRIMARY KEY (historiqueId, login, idpkm, dateAchat),
     CONSTRAINT fk_loginHisto FOREIGN KEY (login)
 REFERENCES Users(login),
     CONSTRAINT fk_idpkmHisto FOREIGN KEY (idpkm)
