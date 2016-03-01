@@ -9,14 +9,33 @@ class TypesDAO extends DAO
 {
     
     /**
-     * @var \MillionsPokemons\DAO\PokemonsDAO
+     * Return a list of all category, sorted by name.
+     *
+     * @return array A list of all types.
      */
-    private $pokemonDAO;
-
-    public function setPokemonsDAO(PokemonsDAO $pokemonDAO) {
-        $this->pokemonDAO = $pokemonDAO;
+    public function findAll() {
+        $sql = "select * from Types order by type";
+        $result = $this->getDb()->fetchAll($sql);
+        
+        // Convert query result to an array of domain objects
+        $types = array();
+        foreach ($result as $row) {
+            $codeType = $row['codeType'];
+            $types[$codeType] = $this->buildDomainObject($row);
+        }
+        return $types;
     }
 
-    /* TODO : complete the 7th iteration */
-    protected function buildDomainObject($row) { }
+    /**
+     * Creates a type object based on a DB row.
+     *
+     * @param array $row The DB row containing Type data.
+     * @return \MillionsPokemons\Domain\Types
+     */
+    protected function buildDomainObject($row) {
+        $type = new Types();
+        $type->setCodeType($row['codeType']);
+        $type->setType($row['type']);
+        return $type;
+    }
 }

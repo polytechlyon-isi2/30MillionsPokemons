@@ -30,7 +30,7 @@ class PokemonsDAO extends DAO
      * Creates a pokemon object based on a DB row.
      *
      * @param array $row The DB row containing Pokemons data.
-     * @return \30MillionsPokemons\Domain\Pokemons
+     * @return \MillionsPokemons\Domain\Pokemons
      */
     protected function buildDomainObject($row) {
         $pokemon = new Pokemons();

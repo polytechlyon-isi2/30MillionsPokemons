@@ -2,29 +2,29 @@
 
 namespace MillionsPokemons\Domain;
 
-class Types
+class TypesPokemons
 {
 
     /**
-     * Type code
+     * Pokemon
      *
-     * @var string
+     * @var \MillionsPokemons\Domain\Pokemons
      */
-    private $codeType;
+    private $pkm;
 
     /**
      * Type
      *
-     * @var string
+     * @var \MillionsPokemons\Domain\Types
      */
     private $type;
     
-    public function getCodeType() {
-        return $this->codeType;
+    public function getPkm() {
+        return $this->pkm;
     }
 
-    public function setCodeType($code) {
-        $this->codeType = $code;
+    public function setPkm($pkm) {
+        $this->pkm = $pkm;
     }
 
     public function getType() {
