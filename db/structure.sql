@@ -28,6 +28,7 @@ create table Historiques (
     idpkm integer not null,
     dateAchat date not null,
     qteAchat integer not null,
+    /* Just historiqueId as Primary key ??? */
     PRIMARY KEY (historiqueId, login, idpkm, dateAchat),
     CONSTRAINT fk_loginHisto FOREIGN KEY (login)
 REFERENCES Users(login),
