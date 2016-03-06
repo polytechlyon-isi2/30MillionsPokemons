@@ -1,58 +1,27 @@
-<!doctype html>
-<html>
-    <head>
+{% extends "layout.html.twig" %}
 
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+{% block title %}Home{% endblock %}
 
-        <!--<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">!-->
-        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="{{ app.request.basepath }}/pokemon.css" rel="stylesheet">
+{% block content %}
+<div class="row category-child">
 
-        <title>30 Millions Pokemons - Home</title>
-
-    </head>
-    <body>
-
-        <div class="container">
-            <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-target">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="">30 Millions Pokemons</a>
-                    </div>
-                    <div class="collapse navbar-collapse" id="navbar-collapse-target">
-                    </div>
+    {% for category in categories %}
+    
+    <div class="col-lg-2 col-md-4 col-xs-6 thumb ">
+        <a class="categoryCodeType" href="{{ path('category', { 'id': category.codeType }) }}">
+            <div class="wrapper">
+                <div class="caption post-content">
+                    <span>{{ category.type }}</span>
                 </div>
-            </nav>   
-
-            <div class="row category-child">
-
-                {% for category in categories %}
-                <div class="col-lg-2 col-md-4 col-xs-6 thumb ">
-                    <a class="thumbnail" href="#">
-                        <div class="wrapper">
-                            <div class="caption post-content">
-                                <span>{{ category.type }}</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                {% endfor %}
             </div>
+        </a>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock %}
 
 
 
-            <footer class="footer">
-                TODO Footer 
-            </footer>
 
-        </div>
 
-    </body>
-</html>
