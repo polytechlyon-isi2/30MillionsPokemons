@@ -4,18 +4,26 @@
 
 {% block content %}
 <div class="row category-child">
-
-    {% for pokemon in articles %}
     
-    <div class="col-lg-2 col-md-4 col-xs-6 thumbnail">
-            <div class="wrapper">
-                <div class="caption post-content">
-                    <span>{{ pokemon.getName }}</span>
-                </div>
+    {% if articles is empty %}
+    
+        <div class="alert alert-info text-center">
+            <strong>Il n'y a aucun pokémon dans cette catégorie !</strong>
+        </div>
+        
+    {% else %}
+    
+        {% for pokemon in articles %}
+            <div class="col-lg-2 col-md-4 col-xs-6 thumbnail">
+                    <div class="wrapper">
+                        <div class="caption post-content">
+                            <span>{{ pokemon.getName }}</span>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </a>
-    </div>
-    {% endfor %}
+        {% endfor %} 
 
+    {% endif %}
 </div>
 {% endblock %}
