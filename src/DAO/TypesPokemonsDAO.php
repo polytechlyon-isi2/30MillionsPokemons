@@ -34,7 +34,6 @@ class TypesPokemonsDAO extends DAO
      */
     public function findAllByType($codeType) {
 
-        //TODO method find in Type.DAO
         $type = $this->typeDAO->find($codeType);
 
         $sql = "select * from Pokemons p 

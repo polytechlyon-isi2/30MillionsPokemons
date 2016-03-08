@@ -17,13 +17,25 @@ class TypesDAO extends DAO
         $sql = "select * from Types order by type";
         $result = $this->getDb()->fetchAll($sql);
         
-        // Convert query result to an array of domain objects
         $types = array();
         foreach ($result as $row) {
             $codeType = $row['codeType'];
             $types[$codeType] = $this->buildDomainObject($row);
         }
         return $types;
+    }
+    
+     /**
+     * Return a Type object for the selected codeType
+     *
+     * @return a TypeDAO object
+     */
+    public function find($codeType) {
+        $sql = "select * from Types WHERE codeType=?";
+        $result = $this->getDb()->fetchAll($sql, array($codeType));
+        
+        $type = $this->buildDomainObject($row);
+        return $type;
     }
 
     /**

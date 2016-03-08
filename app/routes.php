@@ -10,6 +10,6 @@ $app->get('/', function () use ($app) {
 /* Category details 
  * Display all articles of the category selected */
 $app->get('/category/{id}', function ($id) use ($app) {
-    $allPokemons = " ";
+    $allPokemons = $app['dao.typesPokemons']->findAllByType($id);
     return $app['twig']->render('category.html.twig', array('articles' => $allPokemons));
 })->bind('category');
