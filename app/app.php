@@ -37,7 +37,10 @@ $app['dao.types'] = $app->share(function ($app) {
 });
 
 $app['dao.typesPokemons'] = $app->share(function ($app) {
-    return new MillionsPokemons\DAO\TypesPokemonsDAO($app['db']);
+    $typesPokemonsDAO = new MillionsPokemons\DAO\TypesPokemonsDAO($app['db']);
+    $typesPokemonsDAO->setTypeDAO($app['dao.types']);
+    $typesPokemonsDAO->setPokemonsDAO($app['dao.pokemons']);
+    return $typesPokemonsDAO;
 });
 
 $app['dao.historiques'] = $app->share(function ($app) {

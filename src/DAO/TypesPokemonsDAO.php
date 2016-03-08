@@ -9,12 +9,12 @@ class TypesPokemonsDAO extends DAO
 {
     
     /**
-     * @var \MillionsPokemons\DAO\PokemonsDAO
+     * @var \MillionsPokemons\DAO\Pokemons
      */
     private $pokemonDAO;
     
     /**
-     * @var \MillionsPokemons\DAO\TypesDAO
+     * @var \MillionsPokemons\DAO\Types
      */
     private $typeDAO;
 
@@ -35,22 +35,30 @@ class TypesPokemonsDAO extends DAO
     public function findAllByType($codeType) {
 
         $type = $this->typeDAO->find($codeType);
-
-        $sql = "select * from Pokemons p 
-                            JOIN TypesPokemons t ON t.idpkm = p.idpkm 
-                            where t.codeType=? order by p.nom_pkm";
-        $result = $this->getDb()->fetchAll($sql, array($codeType));
+        $sql = "select * from TypesPokemons t 
+                            JOIN Pokemons p ON t.idpkm = p.idpkm 
+                            where t.type=? order by p.nom_pkm";
+        $result = $this->getDb()->fetchAll($sql, array($type->getCodeType()));
 
         $allPokemons = array();
         foreach ($result as $row) {
             $idpkm = $row['idpkm'];
-            $aPokemon = $this->$pokemonDAO->buildDomainObject($row);
-            $allPokemons [$idpkm] = $aPokemon;
+            $typePokemon = $this->buildDomainObject($row);
+            $allPokemons[$idpkm] = $typePokemon->getPkm();
         }
         return $allPokemons;
     }
 
     protected function buildDomainObject($row) { 
-       //TODO
+        $typePokemon = new TypesPokemons();
+
+        if (array_key_exists('idpkm', $row)) {
+            // Find and set the associated pokemon
+            $idpkm = $row['idpkm'];
+            $pkm = $this->pokemonDAO->find($idpkm);
+            $typePokemon->setPkm($pkm);
+        }  
+        
+        return $typePokemon;
     }
 }

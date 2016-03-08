@@ -26,16 +26,20 @@ class TypesDAO extends DAO
     }
     
      /**
-     * Return a Type object for the selected codeType
+     * Returns a type matching the supplied codeType.
      *
-     * @return a TypeDAO object
+     * @param string $codeType
+     *
+     * @return \MillionsPokemons\Domain\Types|throws an exception if no matching type is found
      */
     public function find($codeType) {
-        $sql = "select * from Types WHERE codeType=?";
-        $result = $this->getDb()->fetchAll($sql, array($codeType));
-        
-        $type = $this->buildDomainObject($row);
-        return $type;
+        $sql = "select * from Types where codeType=?";
+        $row = $this->getDb()->fetchAssoc($sql, array($codeType));
+
+        if ($row)
+            return $this->buildDomainObject($row);
+        else
+            throw new \Exception("No Type matching codeType " . $codeType);
     }
 
     /**

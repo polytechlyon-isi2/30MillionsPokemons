@@ -25,6 +25,23 @@ class PokemonsDAO extends DAO
         }
         return $pokemons;
     }
+    
+    /**
+     * Returns a pokemon matching the supplied id.
+     *
+     * @param integer $id
+     *
+     * @return \MillionsPokemons\Domain\Pokemons|throws an exception if no matching type is found
+     */
+    public function find($id) {
+        $sql = "select * from Pokemons where idpkm=?";
+        $row = $this->getDb()->fetchAssoc($sql, array($id));
+
+        if ($row)
+            return $this->buildDomainObject($row);
+        else
+            throw new \Exception("No Pokemon matching id : " . $id);
+    }
 
     /**
      * Creates a pokemon object based on a DB row.
