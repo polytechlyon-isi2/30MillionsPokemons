@@ -15,7 +15,7 @@ $app->get('/category/{id}', function ($id) use ($app) {
 })->bind('category');
 
 /* Connection page for users with an account
- * Display an empty form */
+ * Display an empty form for connection and a link to the register form */
 $app->get('/connect', function () use ($app) {
     return $app['twig']->render('connection.html.twig');
 })->bind('connect');

@@ -2,45 +2,80 @@
 
 namespace MillionsPokemons\DAO;
 
-use Doctrine\DBAL\Connection;
 use MillionsPokemons\Domain\Users;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
-class UsersDAO extends DAO
+class UsersDAO extends DAO implements UserProviderInterface
 {
-    
     /**
-     * Return a list of all users, sorted by name.
+     * Returns a user matching the supplied id.
      *
-     * @return array A list of all users.
+     * @param integer $id The user id.
+     *
+     * @return \MillionsPokemons\Domain\Users|throws an exception if no matching user is found
      */
-    public function findAll() {
-        $sql = "select * from Users order by nom desc";
-        $result = $this->getDb->fetchAll($sql);
+    public function find($id) {
+        $sql = "select * from Users where idUser=?";
+        $row = $this->getDb()->fetchAssoc($sql, array($id));
 
-        // Convert query result to an array of domain objects
-        $user = array();
-        foreach ($result as $row) {
-            $userId = $row['login'];
-            $user[$userId] = $this->buildDomainObject($row);
-        }
-        return $user;
+        if ($row)
+            return $this->buildDomainObject($row);
+        else
+            throw new \Exception("No user matching id " . $id);
     }
 
     /**
-     * Creates a user object based on a DB row.
+     * {@inheritDoc}
+     */
+    public function loadUserByUsername($username)
+    {
+        $sql = "select * from Users where login=?";
+        $row = $this->getDb()->fetchAssoc($sql, array($username));
+
+        if ($row)
+            return $this->buildDomainObject($row);
+        else
+            throw new UsernameNotFoundException(sprintf('User with the login "%s" not found.', $username));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function refreshUser(UserInterface $user)
+    {
+        $class = get_class($user);
+        if (!$this->supportsClass($class)) {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $class));
+        }
+        return $this->loadUserByUsername($user->getUsername());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function supportsClass($class)
+    {
+        return 'MillionsPokemons\Domain\Users' === $class;
+    }
+
+    /**
+     * Creates a User object based on a DB row.
      *
-     * @param array $row The DB row containing user data.
-     * @return \30MillionsPokemons\Domain\Users
+     * @param array $row The DB row containing User data.
+     * @return \MicroCMS\Domain\User
      */
     protected function buildDomainObject($row) {
         $user = new Users();
-        $user->setLogin($row['login']);
+        $user->setId($row['idUser']);
+        $user->setUsername($row['login']);
         $user->setPassword($row['mdp']);
         $user->setName($row['nom']);
         $user->setFirstname($row['prenom']);
-        $user->setMail($row['mail']);
         $user->setAdress($row['adresse']);
-        $user->setAdminStatus($row['admin']);
+        $user->setRole($row['admin']);
         return $user;
     }
 }

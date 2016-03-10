@@ -11,11 +11,11 @@ INSERT INTO Pokemons (nom_pkm, prix, qteStock, description) VALUES ('Nirondelle'
 INSERT INTO Pokemons (nom_pkm, prix, qteStock, description) VALUES ('Pikachu', 2500000, 5 , 'Il lui arrive de remettre d''aplomb un Pikachu allié en lui envoyant une décharge électrique.');
 
 /* ADD USERS */
-INSERT INTO Users VALUES ('Sachouw', '123', 'Lhopital', 'Sacha', 'sacha@yopmail.com', 'adresse', 1);
-INSERT INTO Users VALUES ('bPesquet', '123', 'Pesquet', 'Baptiste', 'pesquet@yopmail.com', 'adresse', 1);
-INSERT INTO Users VALUES ('Yoyolan', '123', 'Lafaye', 'Yoan', 'yoan@yopmail.com', 'adresse', 0);
-INSERT INTO Users VALUES ('Mélan', '123', 'Dubreuil', 'Mélanie', 'mel@yopmail.com', 'adresse', 0);
-INSERT INTO Users VALUES ('infoRPZ', '123', 'Vivies', 'Alexandre', 'info@yopmail.com', 'adresse', 0);
+INSERT INTO Users VALUES (1,'Sachouw', '123', 'Lhopital', 'Sacha', 'adresse', 'ROLE_ADMIN');
+INSERT INTO Users VALUES (2, 'bPesquet', '123', 'Pesquet', 'Baptiste', 'adresse', 'ROLE_ADMIN');
+INSERT INTO Users VALUES (3, 'Yoyolan', '123', 'Lafaye', 'Yoan', 'adresse', 'ROLE_USER');
+INSERT INTO Users VALUES (4, 'Mélan', '123', 'Dubreuil', 'Mélanie', 'adresse', 'ROLE_USER');
+INSERT INTO Users VALUES (5, 'infoRPZ', '123', 'Vivies', 'Alexandre', 'adresse', 'ROLE_USER');
 
 /* ADD HISTORIQUE */
 INSERT INTO Historiques VALUES (1, 'Sachouw', 10, '', 1);

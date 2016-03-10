@@ -2,8 +2,17 @@
 
 namespace MillionsPokemons\Domain;
 
-class Users
+use Symfony\Component\Security\Core\User\UserInterface;
+
+class Users implements UserInterface
 {
+    /**
+     * User id
+     *
+     * @var integer
+     */
+    private $idUser;
+    
     /**
      * User login
      *
@@ -24,44 +33,51 @@ class Users
      * @var string
      */
     private $nameUser;
-    
-     /**
+
+    /**
      * User firstname
      *
      * @var string
      */
     private $firstnameUser;
-    
-     /**
-     * User mail
-     *
-     * @var string
-     */
-    private $mail;
-    
+
     /**
      * User adress
      *
      * @var string
      */
     private $adress;
-    
-    /**
-     * User is admin if = 1 ; not admin if = 0
-     *
-     * @var integer
-     */
-    private $isAdmin;
 
-    
-    public function getLogin() {
+    /**
+     * Role.
+     * Values : ROLE_USER or ROLE_ADMIN.
+     *
+     * @var string
+     */
+    private $role;
+
+    public function getId() {
+        return $this->idUser;
+    }
+
+    public function setId($id) {
+        $this->idUser = $id;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUsername() {
         return $this->login;
     }
 
-    public function setLogin($login) {
+    public function setUsername($login) {
         $this->login = $login;
     }
-    
+
+    /**
+     * @inheritDoc
+     */
     public function getPassword() {
         return $this->mdp;
     }
@@ -85,15 +101,7 @@ class Users
     public function setFirstname($firstname) {
         $this->firstnameUser = $firstname;
     }
-    
-    public function getMail() {
-        return $this->mail;
-    }
 
-    public function setMail($mail) {
-        $this->mail = $mail;
-    }
-    
     public function getAdress() {
         return $this->adress;
     }
@@ -101,12 +109,31 @@ class Users
     public function setAdress($adress) {
         $this->adress = $adress;
     }
-    
-    public function getAdminStatus() {
-        return $this->isAdmin;
+
+    /**
+     * @inheritDoc
+     */
+    public function getSalt()
+    {
+        return $this->salt;
     }
 
-    public function setAdminStatus($isAdmin) {
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        return array($this->getRole());
+    }
+
+    public function setRole($role) {
         $this->isAdmin = $isAdmin;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials() {
+        // Nothing to do here
     }
 }
