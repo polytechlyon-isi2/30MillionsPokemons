@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ceba35cda2103ee2b5b22ad4e2e1313d",
-    "content-hash": "7d59bf6b20f229b562a275468fcd507a",
+    "hash": "a63536d8c18e953b15c74f93b336e1d7",
+    "content-hash": "0ffedfe6d6ec92b8e461f5ff3b7f51a6",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -636,6 +636,61 @@
                 "microframework"
             ],
             "time": "2016-01-06 14:59:35"
+        },
+        {
+            "name": "symfony/asset",
+            "version": "v3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/asset.git",
+                "reference": "28150e07a3e997daa016b757e3833e4878e7ab08"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/asset/zipball/28150e07a3e997daa016b757e3833e4878e7ab08",
+                "reference": "28150e07a3e997daa016b757e3833e4878e7ab08",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "symfony/http-foundation": "~2.8|~3.0"
+            },
+            "suggest": {
+                "symfony/http-foundation": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Asset\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Asset Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-01-20 12:18:23"
         },
         {
             "name": "symfony/debug",

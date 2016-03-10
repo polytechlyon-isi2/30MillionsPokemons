@@ -14,16 +14,14 @@
     {% else %}
     
         {% for pokemon in articles %}
-            <div class="col-lg-2 col-md-4 col-xs-6 thumbnail">
+            <div class="col-lg-2 thumbnail">
                     <div class="wrapper">
-                        <div class="caption post-content">
-                            <span>{{ pokemon.getName }}</span>
-                        </div>
+                        <img data-toggle="tooltip" data-placement="bottom" title="{{ pokemon.getName }}"  src="{{ app.request.basepath }}/images/{{ pokemon.getName }}.jpg">
                     </div>
-                </a>
             </div>
         {% endfor %} 
 
     {% endif %}
+    <br>
 </div>
 {% endblock %}
