@@ -14,7 +14,7 @@
     {% else %}
     
         {% for pokemon in articles %}
-            <div class="col-lg-2 thumbnail">
+            <div class="col-lg-4 thumbnail">
                     <div class="wrapper">
                         <img data-toggle="tooltip" data-placement="bottom" title="{{ pokemon.getName }}"  src="{{ app.request.basepath }}/images/{{ pokemon.getName }}.jpg">
                     </div>

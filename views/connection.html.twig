@@ -1,0 +1,47 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Type{% endblock %}
+
+{% block content %}
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <a  href="{{ path('home') }}"><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button></a>
+            <h4 class="modal-title">Se Connecter</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="well">
+                        <form method="POST" action="/login/">
+                            <div class="form-group">
+                                <label for="username" class="control-label">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" value="" required="" title="Votre mail" placeholder="example@gmail.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="control-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" value="" required="" title="Please enter your password">
+                                <span class="help-block"></span>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-success btn-block">Se Connecter</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <p class="lead">Enregistrez vous maintenant <span class="text-success">GRATUITEMENT </span> !</p>
+                    <ul class="list-unstyled" >
+                        <li><span class="glyphicon glyphicon-ok"></span> Constituez votre panier</li>
+                        <li><span class="glyphicon glyphicon-ok"></span> Finalisez vos commandes facilement</li>
+                        <li><span class="glyphicon glyphicon-ok"></span> Visualisez vos commandes en cours</li>
+                        <li><span class="glyphicon glyphicon-ok"></span> Retrouvez vos anciennes commandes</li>
+                        <li><span class="glyphicon glyphicon-ok"></span> Gagnez des cadeaux <small>(selon conditions)</small></li>
+                        <li><a href="/read-more/"><u>En savoir plus</u></a></li>
+                    </ul>
+                    <p><a href="/new-customer/" class="btn btn-info btn-block">Oui, s'enregistrer maintenant !</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

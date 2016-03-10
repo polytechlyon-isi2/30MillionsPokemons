@@ -10,11 +10,16 @@ body {
     top: 50%;
 }
 
+.list-unstyled {
+    line-height: 2;
+}
+
 .thumbnail {
+    text-align: center;
     border: 0 none;
     box-shadow: none;
 }
-    
+
 .footer {
     border-top: 1px solid #ccc;
     padding-top: 10px;

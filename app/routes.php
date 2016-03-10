@@ -13,3 +13,9 @@ $app->get('/category/{id}', function ($id) use ($app) {
     $allPokemons = $app['dao.typesPokemons']->findAllByType($id);
     return $app['twig']->render('category.html.twig', array('articles' => $allPokemons));
 })->bind('category');
+
+/* Connection page for users with an account
+ * Display an empty form */
+$app->get('/connect', function () use ($app) {
+    return $app['twig']->render('connection.html.twig');
+})->bind('connect');
