@@ -11,11 +11,17 @@ INSERT INTO Pokemons (nom_pkm, prix, qteStock, description) VALUES ('Nirondelle'
 INSERT INTO Pokemons (nom_pkm, prix, qteStock, description) VALUES ('Pikachu', 2500000, 5 , 'Il lui arrive de remettre d''aplomb un Pikachu allié en lui envoyant une décharge électrique.');
 
 /* ADD USERS */
-INSERT INTO Users VALUES (1,'Sachouw', '123', 'Lhopital', 'Sacha', 'adresse', 'ROLE_ADMIN');
-INSERT INTO Users VALUES (2, 'bPesquet', '123', 'Pesquet', 'Baptiste', 'adresse', 'ROLE_ADMIN');
-INSERT INTO Users VALUES (3, 'Yoyolan', '123', 'Lafaye', 'Yoan', 'adresse', 'ROLE_USER');
-INSERT INTO Users VALUES (4, 'Mélan', '123', 'Dubreuil', 'Mélanie', 'adresse', 'ROLE_USER');
-INSERT INTO Users VALUES (5, 'infoRPZ', '123', 'Vivies', 'Alexandre', 'adresse', 'ROLE_USER');
+/* raw password is 'john' */
+insert into Users values
+(1, 'JohnDoe', 'L2nNR5hIcinaJkKR+j4baYaZjcHS0c3WX2gjYF6Tmgl1Bs+C9Qbr+69X8eQwXDvw0vp73PrcSeT0bGEW5+T2hA==', 'YcM=A$nsYzkyeDVjEUa7W9K', 'ROLE_USER');
+/* raw password is 'jane' */
+insert into Users values
+(2, 'JaneDoe', 'EfakNLxyhHy2hVJlxDmVNl1pmgjUZl99gtQ+V3mxSeD8IjeZJ8abnFIpw9QNahwAlEaXBiQUBLXKWRzOmSr8HQ==', 'dhMTBkzwDKxnD;4KNs,4ENy', 'ROLE_USER');
+INSERT INTO Users VALUES (1,'Sachouw', '123', 'bla', 'ROLE_ADMIN');
+INSERT INTO Users VALUES (2, 'bPesquet', '123', 'bla', 'ROLE_ADMIN');
+INSERT INTO Users VALUES (3, 'Yoyolan', '123', 'bla', 'ROLE_USER');
+INSERT INTO Users VALUES (4, 'Mélan', '123', 'bla', 'ROLE_USER');
+INSERT INTO Users VALUES (5, 'infoRPZ', '123', 'bla', 'ROLE_USER');
 
 /* ADD HISTORIQUE */
 INSERT INTO Historiques VALUES (1, 'Sachouw', 10, '', 1);

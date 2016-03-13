@@ -1,27 +1,38 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Type{% endblock %}
+{% block title %}Pokemons par catégories{% endblock %}
 
 {% block content %}
 <div class="row category-child">
-    
+
     {% if articles is empty %}
-    
-        <div class="alert alert-info text-center">
-            <strong>Il n'y a aucun pokémon dans cette catégorie !</strong>
-        </div>
-        
+
+    <div class="alert alert-info text-center">
+        <strong>Il n'y a aucun pokémon dans cette catégorie !</strong>
+    </div>
+
     {% else %}
-    
-        {% for pokemon in articles %}
-            <div class="col-lg-4 thumbnail">
-                    <div class="wrapper">
-                        <img data-toggle="tooltip" data-placement="bottom" title="{{ pokemon.getName }}"  src="{{ app.request.basepath }}/images/{{ pokemon.getName }}.jpg">
-                    </div>
-            </div>
-        {% endfor %} 
+
+    {% for pokemon in articles %}
+    <div class="col-lg-4 thumbnail">
+        <div class="wrapper">
+            <img data-toggle="tooltip" data-placement="bottom" title="{{ pokemon.getName }}"  src="{{ app.request.basepath }}/images/{{ pokemon.getName }}.jpg">
+        </div>
+    </div>
+    {% endfor %} 
 
     {% endif %}
     <br>
+</div>
+<div class="row text-center">
+    {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
+
+    Todo : mettre ce "if" dans la vue pokemon détails + permettre l'ajout au panier ici !
+
+    {% else %}
+
+    <a href="{{ path('login') }} ">Connectez-vous</a> pour commander !
+
+    {% endif %}
 </div>
 {% endblock %}

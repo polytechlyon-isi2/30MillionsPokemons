@@ -26,27 +26,13 @@ class Users implements UserInterface
      * @var string
      */
     private $mdp;
-
-    /**
-     * User name
+    
+     /**
+     * Salt that was originally used to encode the password.
      *
      * @var string
      */
-    private $nameUser;
-
-    /**
-     * User firstname
-     *
-     * @var string
-     */
-    private $firstnameUser;
-
-    /**
-     * User adress
-     *
-     * @var string
-     */
-    private $adress;
+    private $salt;
 
     /**
      * Role.
@@ -86,30 +72,6 @@ class Users implements UserInterface
         $this->mdp = $password;
     }
 
-    public function getName() {
-        return $this->nameUser;
-    }
-
-    public function setName($name) {
-        $this->nameUser = $name;
-    }
-
-    public function getFirstname() {
-        return $this->firstnameUser;
-    }
-
-    public function setFirstname($firstname) {
-        $this->firstnameUser = $firstname;
-    }
-
-    public function getAdress() {
-        return $this->adress;
-    }
-
-    public function setAdress($adress) {
-        $this->adress = $adress;
-    }
-
     /**
      * @inheritDoc
      */
@@ -117,17 +79,26 @@ class Users implements UserInterface
     {
         return $this->salt;
     }
+    
+    public function setSalt($salt) {
+        $this->salt = $salt;
+    }
 
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    public function setRole($role) {
+        $this->role = $role;
+    }
+    
     /**
      * @inheritDoc
      */
     public function getRoles()
     {
         return array($this->getRole());
-    }
-
-    public function setRole($role) {
-        $this->isAdmin = $isAdmin;
     }
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\HttpFoundation\Request;
+
 /* Home page 
  * Display all categories */
 $app->get('/', function () use ($app) {
@@ -16,6 +18,8 @@ $app->get('/category/{id}', function ($id) use ($app) {
 
 /* Connection page for users with an account
  * Display an empty form for connection and a link to the register form */
-$app->get('/connect', function () use ($app) {
-    return $app['twig']->render('connection.html.twig');
-})->bind('connect');
+$app->get('/login', function (Request $request) use ($app) {
+    return $app['twig']->render('connection.html.twig', array(
+        'error'         => $app['security.last_error']($request),
+        'last_username' => $app['session']->get('_security.last_username'),));
+})->bind('login');

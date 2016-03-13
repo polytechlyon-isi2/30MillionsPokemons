@@ -16,9 +16,7 @@ create table Users (
     idUser integer not null primary key auto_increment,
     login varchar(100) not null,
     mdp varchar(100) not null,
-    nom varchar(100),
-    prenom varchar(100),
-    adresse varchar(500),
+    salt varchar(23) not null,
     admin varchar(50) not null
 ) engine=innodb character set utf8 collate utf8_unicode_ci;
 
