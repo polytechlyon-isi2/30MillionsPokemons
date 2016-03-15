@@ -45,7 +45,7 @@ $app->match('/signUp', function(Request $request) use ($app) {
         $user->setPassword($password); 
         $user->setRole('ROLE_USER');
         $app['dao.users']->save($user);
-        $app['session']->getFlashBag()->add('success', 'The user was successfully created.');
+        $app['session']->getFlashBag()->add('success', 'Votre compte a été créé ! :)');
     }
     return $app['twig']->render('user_form.html.twig', array(
         'title' => 'Inscription',
