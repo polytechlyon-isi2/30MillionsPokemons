@@ -56,12 +56,16 @@ class UsersDAO extends DAO implements UserProviderInterface
     /**
      * Saves a user into the database.
      *
-     * @param \MillionsPokemons\Domain\User $user The user to save
+     * @param \MillionsPokemons\Domain\Users $user The user to save
      */
-    public function save(User $user) {
+    public function save(Users $user) {
         $userData = array(
             'login' => $user->getUsername(),
             'mdp' => $user->getPassword(),
+            'name' => $user->getName(),
+            'firstname' => $user->getFirstname(),
+            'adress' => $user->getAdress(),
+            'postCode' => $user->getPostCode(),
             'salt' => $user->getSalt(),
             'admin' => $user->getRole()
             );

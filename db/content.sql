@@ -13,10 +13,10 @@ INSERT INTO Pokemons (nom_pkm, prix, qteStock, description) VALUES ('Pikachu', 2
 /* ADD USERS */
 /* raw password is 'john' */
 insert into Users values
-(1, 'JohnDoe@mail.com', 'L2nNR5hIcinaJkKR+j4baYaZjcHS0c3WX2gjYF6Tmgl1Bs+C9Qbr+69X8eQwXDvw0vp73PrcSeT0bGEW5+T2hA==', 'YcM=A$nsYzkyeDVjEUa7W9K', 'ROLE_USER');
+(1, 'JohnDoe@mail.com', 'L2nNR5hIcinaJkKR+j4baYaZjcHS0c3WX2gjYF6Tmgl1Bs+C9Qbr+69X8eQwXDvw0vp73PrcSeT0bGEW5+T2hA==', 'Doe', 'John', '53 Rue des coquelicots, chateauneuf du rhône', '26780','YcM=A$nsYzkyeDVjEUa7W9K', 'ROLE_USER');
 /* raw password is 'jane' */
 insert into Users values
-(2, 'JaneDoe@mail.com', 'EfakNLxyhHy2hVJlxDmVNl1pmgjUZl99gtQ+V3mxSeD8IjeZJ8abnFIpw9QNahwAlEaXBiQUBLXKWRzOmSr8HQ==', 'dhMTBkzwDKxnD;4KNs,4ENy', 'ROLE_USER');
+(2, 'JaneDoe@mail.com', 'EfakNLxyhHy2hVJlxDmVNl1pmgjUZl99gtQ+V3mxSeD8IjeZJ8abnFIpw9QNahwAlEaXBiQUBLXKWRzOmSr8HQ==', 'Doe', 'Jane', '53 Rue des coquelicots, chateauneuf du rhône', '26780','dhMTBkzwDKxnD;4KNs,4ENy', 'ROLE_USER');
 
 /* TODO :  ADD HISTORIQUE 
 INSERT INTO Historiques VALUES (1, 1, 10, '', 1);

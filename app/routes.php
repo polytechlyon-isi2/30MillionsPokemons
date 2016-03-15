@@ -43,6 +43,7 @@ $app->match('/signUp', function(Request $request) use ($app) {
         // compute the encoded password
         $password = $encoder->encodePassword($plainPassword, $user->getSalt());
         $user->setPassword($password); 
+        $user->setRole('ROLE_USER');
         $app['dao.users']->save($user);
         $app['session']->getFlashBag()->add('success', 'The user was successfully created.');
     }
