@@ -43,9 +43,17 @@ $app->match('/signUp', function(Request $request) use ($app) {
         // compute the encoded password
         $password = $encoder->encodePassword($plainPassword, $user->getSalt());
         $user->setPassword($password); 
-        $user->setRole('ROLE_USER');
-        $app['dao.users']->save($user);
-        $app['session']->getFlashBag()->add('success', 'Votre compte a été créé ! :)');
+        $user->setRole('ROLE_USER'); // setup the role as user 
+        try {
+            $app['dao.users']->find($user->getId());
+            $app['dao.users']->save($user);
+            $app['session']->getFlashBag()->add('success', 'Votre compte a été créé ! :)');   
+        } catch (Exception $e) {
+            return $app['twig']->render('user_form.html.twig', array(
+                'title' => 'Inscription',
+                'error' => $e->getMessage(),
+                'userForm' => $userForm->createView()));
+        }
     }
     return $app['twig']->render('user_form.html.twig', array(
         'title' => 'Inscription',
