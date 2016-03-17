@@ -16,6 +16,10 @@
     box-shadow: none;
 }
 
+.btn-product{
+	width: 100%;
+}
+
 .footer {
     border-top: 1px solid #ccc;
     padding-top: 10px;

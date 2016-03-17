@@ -20,6 +20,14 @@ $app->get('/category/{id}', function ($id) use ($app) {
     return $app['twig']->render('category.html.twig', array('articles' => $allPokemons));
 })->bind('category');
 
+/* Articles details 
+ * Display all details of a selected article */
+$app->get('/article/{id}', function ($id) use ($app) {
+    $aPokemon = $app['dao.pokemons']->find($id);
+    $pokemonTypes = $app['dao.typesPokemons']->findAllByPokemon($id);
+    return $app['twig']->render('article.html.twig', array('details' => $aPokemon, 'types' => $pokemonTypes));
+})->bind('article');
+
 /* Connection page for users with an account
  * Display an empty form for connection and a link to the register form */
 $app->get('/login', function (Request $request) use ($app) {

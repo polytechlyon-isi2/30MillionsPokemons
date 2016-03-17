@@ -48,16 +48,44 @@ class TypesPokemonsDAO extends DAO
         }
         return $allPokemons;
     }
+    
+     /**
+     * Return a list of all types for a selected pokemon.
+     *
+     * @param integer $idpkm The pokemon.
+     * @return array A list of all types corresponding to the pokemon.
+     */
+    public function findAllByPokemon($idpkm) {
+
+        $pokemons = $this->pokemonDAO->find($idpkm);
+        $sql = "select * from TypesPokemons t 
+                            JOIN Types tbis ON tbis.codeType = t.type 
+                            where t.idpkm=?";
+        $result = $this->getDb()->fetchAll($sql, array($pokemons->getId()));
+
+        $allTypes = array();
+        foreach ($result as $row) {
+            $codeType = $row['codeType'];
+            $typePokemon = $this->buildDomainObject($row);
+            $allTypes[$codeType] = $typePokemon->getType();
+        }
+        return $allTypes;
+    }
 
     protected function buildDomainObject($row) { 
         $typePokemon = new TypesPokemons();
 
         if (array_key_exists('idpkm', $row)) {
-            // Find and set the associated pokemon
             $idpkm = $row['idpkm'];
             $pkm = $this->pokemonDAO->find($idpkm);
             $typePokemon->setPkm($pkm);
-        }  
+        }
+        
+        if (array_key_exists('codeType', $row)) {
+            $codeType = $row['codeType'];
+            $type = $this->typeDAO->find($codeType);
+            $typePokemon->setType($type);
+        }
         
         return $typePokemon;
     }
