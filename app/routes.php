@@ -7,36 +7,44 @@ use MillionsPokemons\Domain\Users;
 use MillionsPokemons\Form\Type\UserType;
 
 /* Home page 
- * Display all categories */
+ * Display all categories 
+ */
 $app->get('/', function () use ($app) {
     $types = $app['dao.types']->findAll();
     return $app['twig']->render('index.html.twig', array('categories' => $types));
 })->bind('home');
 
-/* Category details 
- * Display all articles of the category selected */
+/* Category page
+ * Display all articles of the category selected 
+ */
 $app->get('/category/{id}', function ($id) use ($app) {
     $allPokemons = $app['dao.typesPokemons']->findAllByType($id);
-    return $app['twig']->render('category.html.twig', array('articles' => $allPokemons));
+    $category = $app['dao.types']->find($id);
+    return $app['twig']->render('category.html.twig', array('articles' => $allPokemons, 'category' => $category));
 })->bind('category');
 
-/* Articles details 
- * Display all details of a selected article */
+/* Article page
+ * Display all details of a selected article 
+ */
 $app->get('/article/{id}', function ($id) use ($app) {
     $aPokemon = $app['dao.pokemons']->find($id);
     $pokemonTypes = $app['dao.typesPokemons']->findAllByPokemon($id);
     return $app['twig']->render('article.html.twig', array('details' => $aPokemon, 'types' => $pokemonTypes));
 })->bind('article');
 
-/* Connection page for users with an account
- * Display an empty form for connection and a link to the register form */
+/* Log in page 
+ * Display an empty form for connection and a link to the register form 
+ */
 $app->get('/login', function (Request $request) use ($app) {
     return $app['twig']->render('connection.html.twig', array(
         'error'         => $app['security.last_error']($request),
         'last_username' => $app['session']->get('_security.last_username'),));
 })->bind('login');
 
-/* Add a new user in database */
+/* Sign up page 
+ * Display an empty form for add a user in the database. 
+ * The default role of the user is "ROLE_USER".
+ */
 $app->match('/signUp', function(Request $request) use ($app) {
     $user = new Users();
     $userForm = $app['form.factory']->create(new UserType(), $user);
@@ -55,7 +63,7 @@ $app->match('/signUp', function(Request $request) use ($app) {
         try {
             $app['dao.users']->find($user->getId());
             $app['dao.users']->save($user);
-            $app['session']->getFlashBag()->add('success', 'Votre compte a été créé ! :)');   
+            $app['session']->getFlashBag()->add('success', 'Votre compte a été créé ! :)'); 
         } catch (Exception $e) {
             return $app['twig']->render('user_form.html.twig', array(
                 'title' => 'Inscription',
@@ -67,34 +75,3 @@ $app->match('/signUp', function(Request $request) use ($app) {
         'title' => 'Inscription',
         'userForm' => $userForm->createView()));
 })->bind('user_add');
-
-/*  TODO : edit user and delete one ! 
-$app->match('/admin/user/{id}/edit', function($id, Request $request) use ($app) {
-    $user = $app['dao.user']->find($id);
-    $userForm = $app['form.factory']->create(new UserType(), $user);
-    $userForm->handleRequest($request);
-    if ($userForm->isSubmitted() && $userForm->isValid()) {
-        $plainPassword = $user->getPassword();
-        // find the encoder for the user
-        $encoder = $app['security.encoder_factory']->getEncoder($user);
-        // compute the encoded password
-        $password = $encoder->encodePassword($plainPassword, $user->getSalt());
-        $user->setPassword($password); 
-        $app['dao.user']->save($user);
-        $app['session']->getFlashBag()->add('success', 'The user was succesfully updated.');
-    }
-    return $app['twig']->render('user_form.html.twig', array(
-        'title' => 'Edit user',
-        'userForm' => $userForm->createView()));
-})->bind('admin_user_edit');
-
-// Remove a user
-$app->get('/admin/user/{id}/delete', function($id, Request $request) use ($app) {
-    // Delete all associated comments
-    $app['dao.comment']->deleteAllByUser($id);
-    // Delete the user
-    $app['dao.user']->delete($id);
-    $app['session']->getFlashBag()->add('success', 'The user was succesfully removed.');
-    // Redirect to admin home page
-    return $app->redirect($app['url_generator']->generate('admin'));
-})->bind('admin_user_delete'); */ 

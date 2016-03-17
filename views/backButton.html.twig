@@ -1,3 +1,16 @@
 {% extends 'layout.html.twig' %}
 
-{% block footer %} <a href="{{ path('home') }}" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Retour à la page d'accueil</a> {% endblock %}
+{% block footer %} 
+
+
+{% if app.request.get('_route') == 'category' %}
+<a href="{{ path('home') }}" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Retour à la page d'accueil</a> 
+{% endif %}
+
+
+
+{% if app.request.get('_route') == 'article' %}
+<a href="{{ path('category', { 'id':  types|first.codeType }) }}"><span class="glyphicon glyphicon-chevron-left"></span> Retour à la catégorie </a> 
+{% endif %}
+
+{% endblock %}

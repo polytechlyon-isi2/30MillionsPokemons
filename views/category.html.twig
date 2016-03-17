@@ -1,6 +1,6 @@
 {% extends 'backButton.html.twig' %}
 
-{% block title %}Pokemons par catégories{% endblock %}
+{% block title %}Pokemons : {{ category.type }}{% endblock %}
 
 {% block content %}
 <div class="row category-child">
@@ -25,16 +25,5 @@
 
     {% endif %}
     <br>
-</div>
-<div class="row text-center">
-    {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
-
-    Todo : mettre ce "if" dans la vue pokemon détails + permettre l'ajout au panier ici !
-
-    {% else %}
-
-    <a href="{{ path('login') }} ">Connectez-vous</a> pour commander !
-
-    {% endif %}
 </div>
 {% endblock %}
