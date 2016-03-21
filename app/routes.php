@@ -60,7 +60,9 @@ $app->match('/signUp', function(Request $request) use ($app) {
         $password = $encoder->encodePassword($plainPassword, $user->getSalt());
         $user->setPassword($password); 
         $user->setRole('ROLE_USER'); // setup the role as user 
-        try {
+        
+        /*To remove ASAP !
+          try {
             $app['dao.users']->find($user->getId());
             $app['dao.users']->save($user);
             $app['session']->getFlashBag()->add('success', 'Votre compte a été créé ! :)'); 
@@ -69,7 +71,10 @@ $app->match('/signUp', function(Request $request) use ($app) {
                 'title' => 'Inscription',
                 'error' => $e->getMessage(),
                 'userForm' => $userForm->createView()));
-        }
+        }*/
+        
+        $app['dao.users']->save($user);
+        $app['session']->getFlashBag()->add('success', 'The user was successfully created.');
     }
     return $app['twig']->render('user_form.html.twig', array(
         'title' => 'Inscription',
