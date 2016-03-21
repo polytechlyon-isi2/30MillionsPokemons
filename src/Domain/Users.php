@@ -2,10 +2,19 @@
 
 namespace MillionsPokemons\Domain;
 
-class Users
+use Symfony\Component\Security\Core\User\UserInterface;
+
+class Users implements UserInterface
 {
     /**
-     * User login
+     * User id
+     *
+     * @var integer
+     */
+    private $idUser;
+    
+    /**
+     * User username. It's an adress mail.
      *
      * @var string
      */
@@ -17,51 +26,72 @@ class Users
      * @var string
      */
     private $mdp;
-
-    /**
+    
+     /**
      * User name
      *
      * @var string
      */
-    private $nameUser;
+    private $name;
     
      /**
      * User firstname
      *
      * @var string
      */
-    private $firstnameUser;
+    private $firstname;
     
      /**
-     * User mail
-     *
-     * @var string
-     */
-    private $mail;
-    
-    /**
      * User adress
      *
      * @var string
      */
     private $adress;
     
-    /**
-     * User is admin if = 1 ; not admin if = 0
+     /**
+     * User postCode
      *
-     * @var integer
+     * @var string
      */
-    private $isAdmin;
-
+    private $postCode;
     
-    public function getLogin() {
+     /**
+     * Salt that was originally used to encode the password.
+     *
+     * @var string
+     */
+    private $salt;
+
+    /**
+     * Role.
+     * Values : ROLE_USER or ROLE_ADMIN.
+     *
+     * @var string
+     */
+    private $role;
+
+    public function getId() {
+        return $this->idUser;
+    }
+
+    public function setId($id) {
+        $this->idUser = $id;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUsername() {
         return $this->login;
     }
 
-    public function setLogin($login) {
-        $this->login = $login;
+    public function setUsername($username) {
+        $this->login = $username;
     }
-    
+
+    /**
+     * @inheritDoc
+     */
     public function getPassword() {
         return $this->mdp;
     }
@@ -69,29 +99,21 @@ class Users
     public function setPassword($password) {
         $this->mdp = $password;
     }
-
+    
     public function getName() {
-        return $this->nameUser;
+        return $this->name;
     }
 
     public function setName($name) {
-        $this->nameUser = $name;
+        $this->name = $name;
     }
-
+    
     public function getFirstname() {
-        return $this->firstnameUser;
+        return $this->firstname;
     }
 
     public function setFirstname($firstname) {
-        $this->firstnameUser = $firstname;
-    }
-    
-    public function getMail() {
-        return $this->mail;
-    }
-
-    public function setMail($mail) {
-        $this->mail = $mail;
+        $this->firstname = $firstname;
     }
     
     public function getAdress() {
@@ -102,11 +124,47 @@ class Users
         $this->adress = $adress;
     }
     
-    public function getAdminStatus() {
-        return $this->isAdmin;
+    public function getPostCode() {
+        return $this->postCode;
     }
 
-    public function setAdminStatus($isAdmin) {
-        $this->isAdmin = $isAdmin;
+    public function setPostCode($postCode) {
+        $this->postCode = $postCode;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+    
+    public function setSalt($salt) {
+        $this->salt = $salt;
+    }
+
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    public function setRole($role) {
+        $this->role = $role;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        return array($this->getRole());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials() {
+        // Nothing to do here
     }
 }

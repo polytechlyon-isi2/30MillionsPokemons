@@ -1,0 +1,53 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Connection & Inscription{% endblock %}
+
+{% block content %}
+{% if error %}
+<div class="alert alert-danger">
+    <strong>Echec de l'authentification ! Vérifiez votre mail et/ou votre mot de passe.</strong>
+</div>
+{% endif %}
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <a  href="{{ path('home') }}"><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button></a>
+            <h4 class="modal-title">Se Connecter</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="well">
+                        <form method="POST" action="{{ path('login_check') }}">
+                            <div class="form-group">
+                                <label for="username" class="control-label">Email</label>
+                                <input type="email" class="form-control" id="username" name="_username" value="{{ last_username }}"  required="" title="Email non reconnu" placeholder="example@gmail.com">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="control-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="_password" value="" required="" title="Saisir un mot de passe">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-success btn-block">Se Connecter</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <p class="lead">Enregistrez vous maintenant <span class="text-success">GRATUITEMENT </span> !</p>
+                    <ul class="list-unstyled" >
+                        <li><span class="glyphicon glyphicon-ok"></span> Constituez votre panier</li>
+                        <li><span class="glyphicon glyphicon-ok"></span> Finalisez vos commandes facilement</li>
+                        <li><span class="glyphicon glyphicon-ok"></span> Visualisez vos commandes en cours</li>
+                        <li><span class="glyphicon glyphicon-ok"></span> Retrouvez vos anciennes commandes</li>
+                        <li><span class="glyphicon glyphicon-ok"></span> Gagnez des cadeaux <small>(selon conditions)</small></li>
+                        <li><a href="/read-more/"><u>En savoir plus</u></a></li>
+                    </ul>
+                    <p><a href="{{ path('user_add') }}" class="btn btn-info btn-block">Oui, s'enregistrer maintenant !</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

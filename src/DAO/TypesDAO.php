@@ -17,13 +17,29 @@ class TypesDAO extends DAO
         $sql = "select * from Types order by type";
         $result = $this->getDb()->fetchAll($sql);
         
-        // Convert query result to an array of domain objects
         $types = array();
         foreach ($result as $row) {
             $codeType = $row['codeType'];
             $types[$codeType] = $this->buildDomainObject($row);
         }
         return $types;
+    }
+    
+     /**
+     * Returns a type matching the supplied codeType.
+     *
+     * @param string $codeType
+     *
+     * @return \MillionsPokemons\Domain\Types|throws an exception if no matching type is found
+     */
+    public function find($codeType) {
+        $sql = "select * from Types where codeType=?";
+        $row = $this->getDb()->fetchAssoc($sql, array($codeType));
+
+        if ($row)
+            return $this->buildDomainObject($row);
+        else
+            throw new \Exception("No Type matching codeType " . $codeType);
     }
 
     /**

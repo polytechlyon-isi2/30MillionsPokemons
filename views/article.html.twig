@@ -1,0 +1,45 @@
+{% extends 'backButton.html.twig' %}
+
+{% block title %}{{details.getName}}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="thumbnail" >
+        {% for aType in types %}
+        <h4 class="text-center"><span class="label label-info">{{ aType.type }}</span></h4>
+        {% endfor %}
+        <br>
+        <img data-toggle="tooltip" data-placement="bottom" title="{{ details.getName }}"  src="{{ app.request.basepath }}/images/{{ details.getName }}.jpg">
+        <div class="caption">
+            <div class="row">
+                <div class="col-md-6 col-xs-6">
+                    <h3>{{ details.getName }}</h3>
+                </div>
+                <div class="col-md-6 col-xs-6 price">
+                    <h3>
+                        <label>{{ details.getPrice }}€</label></h3>
+                </div>
+            </div>
+            <br>
+            <p>{{ details.getDescription }}</p>
+            <br>
+            <div class="row">
+                {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
+
+
+                <a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Acheter </a>
+
+
+                {% else %}
+
+                <a href="{{ path('login') }} ">Connectez-vous</a> pour ajouter ce pokémon à votre panier !
+
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

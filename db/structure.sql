@@ -13,28 +13,34 @@ create table Pokemons (
 ) engine=innodb character set utf8 collate utf8_unicode_ci;
 
 create table Users (
-    login varchar(100) not null primary key,
+    idUser integer not null primary key auto_increment,
+    login varchar(50) not null,
     mdp varchar(100) not null,
-    nom varchar(100),
-    prenom varchar(100),
-    mail varchar(100),
-    adresse varchar(500),
-    admin tinyint (1) not null
+    name varchar(50) not null,
+    firstname varchar(50) not null,
+    adress varchar(100) not null,
+    postCode varchar(23) not null,
+    salt varchar(23) not null,
+    admin varchar(50) not null, 
+    CONSTRAINT loginUnique_Users UNIQUE (login)
 ) engine=innodb character set utf8 collate utf8_unicode_ci;
 
+/* TODO : fix historiques db 
 create table Historiques (
     historiqueId integer not null auto_increment,
     login varchar(100) not null,
     idpkm integer not null,
     dateAchat date not null,
     qteAchat integer not null,
-    /* Just historiqueId as Primary key ??? */
+    // >> Just historiqueId as Primary key ??? 
     PRIMARY KEY (historiqueId, login, idpkm, dateAchat),
     CONSTRAINT fk_loginHisto FOREIGN KEY (login)
 REFERENCES Users(login),
     CONSTRAINT fk_idpkmHisto FOREIGN KEY (idpkm)
 REFERENCES Pokemons(idpkm)
 ) engine=innodb character set utf8 collate utf8_unicode_ci;
+
+*/
 
 create table Types (
     codeType varchar(100) not null primary key,

@@ -12,7 +12,7 @@ class Historiques
     private $historiqueId;
     
     /**
-     * User login
+     * The user concerned by the purchase
      *
      * @var \MillionsPokemons\Domain\Users
      */
@@ -52,7 +52,7 @@ class Historiques
         return $this->user;
     }
 
-    public function setUser($user) {
+    public function setUser(Users $user) {
         $this->user = $user;
     }
     
@@ -60,7 +60,7 @@ class Historiques
         return $this->pkm;
     }
 
-    public function setPkm($pkm) {
+    public function setPkm(Pokemons $pkm) {
         $this->pkm = $pkm;
     }
 

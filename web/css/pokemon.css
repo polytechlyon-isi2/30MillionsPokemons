@@ -1,0 +1,27 @@
+.wrapper img {
+    text-align: center;
+    width:150px;
+    height:150px;
+    left: 50%;
+    top: 50%;
+}
+
+.list-unstyled {
+    line-height: 2;
+}
+
+.thumbnail {
+    text-align: center;
+    border: 0 none;
+    box-shadow: none;
+}
+
+.btn-product{
+	width: 100%;
+}
+
+.footer {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    text-align: center;
+}

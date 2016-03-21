@@ -1,10 +1,29 @@
-{% extends 'layout.html.twig' %}
+{% extends 'backButton.html.twig' %}
 
-{% block title %}TODO : put something here{% endblock %}
+{% block title %}Pokemons : {{ category.type }}{% endblock %}
 
 {% block content %}
-<p>
-    work in progress...
-    
-</p>
+<div class="row category-child">
+
+    {% if articles is empty %}
+
+    <div class="alert alert-info text-center">
+        <strong>Il n'y a aucun pokémon dans cette catégorie !</strong>
+    </div>
+
+    {% else %}
+
+    {% for pokemon in articles %}
+    <div class="col-lg-4 thumbnail">
+        <a href="{{ path('article', { 'id': pokemon.id }) }}">
+            <div class="wrapper">
+                <img data-toggle="tooltip" data-placement="bottom" title="{{ pokemon.getName }}"  src="{{ app.request.basepath }}/images/{{ pokemon.getName }}.jpg">
+            </div>
+        </a>
+    </div>
+    {% endfor %} 
+
+    {% endif %}
+    <br>
+</div>
 {% endblock %}

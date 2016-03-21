@@ -11,16 +11,17 @@ INSERT INTO Pokemons (nom_pkm, prix, qteStock, description) VALUES ('Nirondelle'
 INSERT INTO Pokemons (nom_pkm, prix, qteStock, description) VALUES ('Pikachu', 2500000, 5 , 'Il lui arrive de remettre d''aplomb un Pikachu allié en lui envoyant une décharge électrique.');
 
 /* ADD USERS */
-INSERT INTO Users VALUES ('Sachouw', '123', 'Lhopital', 'Sacha', 'sacha@yopmail.com', 'adresse', 1);
-INSERT INTO Users VALUES ('bPesquet', '123', 'Pesquet', 'Baptiste', 'pesquet@yopmail.com', 'adresse', 1);
-INSERT INTO Users VALUES ('Yoyolan', '123', 'Lafaye', 'Yoan', 'yoan@yopmail.com', 'adresse', 0);
-INSERT INTO Users VALUES ('Mélan', '123', 'Dubreuil', 'Mélanie', 'mel@yopmail.com', 'adresse', 0);
-INSERT INTO Users VALUES ('infoRPZ', '123', 'Vivies', 'Alexandre', 'info@yopmail.com', 'adresse', 0);
+/* raw password is 'john' */
+insert into Users values
+(1, 'JohnDoe@mail.com', 'L2nNR5hIcinaJkKR+j4baYaZjcHS0c3WX2gjYF6Tmgl1Bs+C9Qbr+69X8eQwXDvw0vp73PrcSeT0bGEW5+T2hA==', 'Doe', 'John', '53 Rue des coquelicots, chateauneuf du rhône', '26780','YcM=A$nsYzkyeDVjEUa7W9K', 'ROLE_USER');
+/* raw password is 'jane' */
+insert into Users values
+(2, 'JaneDoe@mail.com', 'EfakNLxyhHy2hVJlxDmVNl1pmgjUZl99gtQ+V3mxSeD8IjeZJ8abnFIpw9QNahwAlEaXBiQUBLXKWRzOmSr8HQ==', 'Doe', 'Jane', '53 Rue des coquelicots, chateauneuf du rhône', '26780','dhMTBkzwDKxnD;4KNs,4ENy', 'ROLE_USER');
 
-/* ADD HISTORIQUE */
-INSERT INTO Historiques VALUES (1, 'Sachouw', 10, '', 1);
-INSERT INTO Historiques VALUES (2, 'Sachouw', 1, '', 1);
-INSERT INTO Historiques VALUES (3, 'Yoyolan', 6, '', 1);
+/* TODO :  ADD HISTORIQUE 
+INSERT INTO Historiques VALUES (1, 1, 10, '', 1);
+INSERT INTO Historiques VALUES (2, 1, 1, '', 1);
+INSERT INTO Historiques VALUES (3, 2, 6, '', 1); */
 
 /* ADD TYPES */
 INSERT INTO Types VALUES ('ACIER','acier');
