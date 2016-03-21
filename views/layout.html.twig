@@ -25,7 +25,7 @@
                     <ul class="nav nav-pills nav-stacked">
                         {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-user"></span> Bienvenue, {{ app.user.username }} ! <span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-user"></span> Bienvenue, {{ app.user.username }}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ path('logout') }}">Se Déconnecter</a></li>
                             </ul>

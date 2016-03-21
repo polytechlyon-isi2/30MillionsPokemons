@@ -72,6 +72,9 @@ $app->match('/signUp', function(Request $request) use ($app) {
                 'userForm' => $userForm->createView()));
         }
     }
+    /* Take a look ?
+    $token = new Users($user->getUsername(), $user->getPassword(), "secured_area", $user->getRoles());
+    $app['security']->setToken($token); */
     return $app['twig']->render('user_form.html.twig', array(
         'title' => 'Inscription',
         'userForm' => $userForm->createView()));
