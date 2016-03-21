@@ -9,6 +9,11 @@
     {{ flashMessage }}
 </div>
 {% endfor %}
+{% for flashMessage in app.session.flashbag.get('problem') %}
+<div class="alert alert-danger">
+    {{ flashMessage }}
+</div>
+{% endfor %}
 {% if form_errors(userForm.password.first) %}
 <div class="alert alert-danger">
     {{ form_errors(userForm.password.first) }}
@@ -90,7 +95,7 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-5 col-sm-3">
-            <input type="submit" class="btn btn-primary" value="Save" />
+            <input type="submit" class="btn btn-primary" value="S'inscrire & se Connecter"/>
         </div>
     </div>
 {{ form_end(userForm) }}

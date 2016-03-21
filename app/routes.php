@@ -60,21 +60,17 @@ $app->match('/signUp', function(Request $request) use ($app) {
         $password = $encoder->encodePassword($plainPassword, $user->getSalt());
         $user->setPassword($password); 
         $user->setRole('ROLE_USER'); // setup the role as user 
-        
-        /*To remove ASAP !
-          try {
-            $app['dao.users']->find($user->getId());
+
+        try {
             $app['dao.users']->save($user);
             $app['session']->getFlashBag()->add('success', 'Votre compte a été créé ! :)'); 
         } catch (Exception $e) {
+            $app['session']->getFlashBag()->add('problem', 'Un compte est déjà renseigné pour cet email !'); 
             return $app['twig']->render('user_form.html.twig', array(
                 'title' => 'Inscription',
                 'error' => $e->getMessage(),
                 'userForm' => $userForm->createView()));
-        }*/
-        
-        $app['dao.users']->save($user);
-        $app['session']->getFlashBag()->add('success', 'The user was successfully created.');
+        }
     }
     return $app['twig']->render('user_form.html.twig', array(
         'title' => 'Inscription',
