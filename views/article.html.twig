@@ -7,7 +7,7 @@
 <div class="row">
     <div class="thumbnail" >
         {% for aType in types %}
-        <h4 class="text-center"><span class="label label-info">{{ aType.type }}</span></h4>
+        <a href="{{ path('category', { 'id': aType.codeType }) }}"><h4 class="text-center"><span class="label label-info">{{ aType.type }}</span></h4></a>
         {% endfor %}
         <br>
         <img data-toggle="tooltip" data-placement="bottom" title="{{ details.getName }}"  src="{{ app.request.basepath }}/images/{{ details.getName }}.jpg">
@@ -28,7 +28,7 @@
                 {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
 
 
-                <a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Acheter </a>
+                <a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Ajouter au panier </a>
 
 
                 {% else %}

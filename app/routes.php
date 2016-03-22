@@ -163,3 +163,13 @@ $app->get('/profil', function (Request $request) use ($app) {
     return $app['twig']->render('user_profil.html.twig', array());
     
 })->bind('profil');
+
+/* */
+$app->get('/shop_cart/{id}', function ($id, Request $request) use ($app) {
+    
+    //todo : get all articles in the cart
+    
+    return $app['twig']->render('shop_cart.html.twig', array(
+        'title' => 'Mon panier'));
+    
+})->bind('shop_cart');
