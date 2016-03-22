@@ -1,6 +1,9 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use MillionsPokemons\Domain\Comments;
 use MillionsPokemons\Domain\Articles;
 use MillionsPokemons\Domain\Users;
@@ -79,6 +82,13 @@ $app->match('/signUp', function(Request $request) use ($app) {
             
             $app['dao.users']->save($user);
             $app['session']->getFlashBag()->add('success', 'Votre compte a été créé ! :)'); 
+            
+            /* Token for connect the new user ! */
+            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+            $app['security']->setToken($token);
+            $app['session']->set('_security_main',serialize($token));
+            
+            return $app->redirect($app['url_generator']->generate('home'));
             
         } catch (Exception $e) {
             
