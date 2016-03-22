@@ -1,0 +1,63 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Détails de votre compte {% endblock %}
+
+{% block content %}
+
+{% for flashMessage in app.session.flashbag.get('success') %}
+    <div class="alert alert-success">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{ app.user.getFirstname }} {{ app.user.getName }}</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3 col-lg-3 " align="center"> 
+                <span class="glyphicon glyphicon-user glyphicon_big"></span>  
+            </div>
+
+            <div class=" col-md-9 col-lg-9 "> 
+              <table class="table table-user-information">
+                <tbody>
+                  <tr>
+                    <td>Identificateur du compte :</td>
+                    <td>{{ app.user.getId }}</td>
+                  </tr>
+                  <tr>
+                    <td>Adresse mail (login) :</td>
+                    <td>{{ app.user.getUsername }}</td>
+                  </tr>
+                  <tr>
+                    <td> Nom :</td>
+                    <td>{{ app.user.getName }}</td>
+                  </tr>
+                    <tr>
+                    <td> Prénom :</td>
+                      <td> {{ app.user.getFirstname }}</td>
+                    </tr>
+
+                     <tr>
+                         <tr>
+                    <td>Adresse : </td>
+                    <td>{{ app.user.getAdress }}</td>
+                  </tr>
+                    <tr>
+                    <td>Code Postal :</td>
+                    <td>{{ app.user.getPostCode }}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+            <span class="pull-right">
+                <a href="{{ path('user_edit', { 'id': app.user.getId }) }}" data-toggle="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier mon profil" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+            </span>
+        </div>
+      </div>
+    
+{% endblock %}

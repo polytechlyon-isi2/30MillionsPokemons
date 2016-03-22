@@ -20,6 +20,10 @@
 	width: 100%;
 }
 
+.glyphicon_big {
+    font-size: 1000%
+}
+
 .footer {
     border-top: 1px solid #ccc;
     padding-top: 10px;
