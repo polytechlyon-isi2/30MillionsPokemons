@@ -10,7 +10,7 @@
 
 
 {% if app.request.get('_route') == 'article' %}
-<a href="{{ path('category', { 'id':  types|first.codeType }) }}"><span class="glyphicon glyphicon-chevron-left"></span> Retour à la catégorie </a> 
+<a href="{{ path('category', { 'id':  types|first.codeType }) }}" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Retour à la catégorie </a> 
 {% endif %}
 
 {% endblock %}

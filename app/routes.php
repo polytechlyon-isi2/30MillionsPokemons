@@ -164,12 +164,21 @@ $app->get('/profil', function (Request $request) use ($app) {
     
 })->bind('profil');
 
-/* */
+/* Shop Cart page
+ * Display détails of the shop cart for the connected user
+ */
 $app->get('/shop_cart/{id}', function ($id, Request $request) use ($app) {
     
-    //todo : get all articles in the cart
+    $allCartsLine = $app['dao.panier']->findAllByUser($id);
+    $total = 0;    
+    
+    foreach($allCartsLine as $line) {
+        $total += $line->getPkm()->getPrice() * $line->getQte();
+    }    
     
     return $app['twig']->render('shop_cart.html.twig', array(
-        'title' => 'Mon panier'));
+        'title' => 'Mon panier',
+        'cartsLine' => $allCartsLine, 
+        'total' => $total));
     
 })->bind('shop_cart');

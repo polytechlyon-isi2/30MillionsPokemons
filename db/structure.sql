@@ -25,6 +25,17 @@ create table Users (
     CONSTRAINT loginUnique_Users UNIQUE (login)
 ) engine=innodb character set utf8 collate utf8_unicode_ci;
 
+create table Panier (
+    idUser integer not null,
+    idpkm integer not null,
+    qte integer not null,
+    PRIMARY KEY (idpkm, idUser),
+    CONSTRAINT fk_idpkmPanier FOREIGN KEY (idpkm)
+REFERENCES Pokemons(idpkm),
+    CONSTRAINT fk_idUserPanier FOREIGN KEY (idUser)
+REFERENCES Users(idUser)
+) engine=innodb character set utf8 collate utf8_unicode_ci;
+
 /* TODO : fix historiques db 
 create table Historiques (
     historiqueId integer not null auto_increment,

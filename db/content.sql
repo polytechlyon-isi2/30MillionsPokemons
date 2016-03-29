@@ -8,7 +8,7 @@ INSERT INTO Pokemons (nom_pkm, prix, qteStock, description) VALUES ('Poissirène
 INSERT INTO Pokemons (nom_pkm, prix, qteStock, description) VALUES ('Ténéfix', 300, 2 , 'À force de manger des gemmes, les yeux de ce Pokémon des grottes obscures sont devenus des joyaux.');
 INSERT INTO Pokemons (nom_pkm, prix, qteStock, description) VALUES ('Arbok', 200, 4 , 'Il utilise la marque sur son ventre pour intimider l''ennemi. Il étouffe l''ennemi pétrifié par la peur.');
 INSERT INTO Pokemons (nom_pkm, prix, qteStock, description) VALUES ('Nirondelle', 200, 6 , 'Ce Pokémon téméraire n''a pas peur d''affronter des ennemis puissants. Il vole en quête de climats chauds.');
-INSERT INTO Pokemons (nom_pkm, prix, qteStock, description) VALUES ('Pikachu', 2500000, 5 , 'Il lui arrive de remettre d''aplomb un Pikachu allié en lui envoyant une décharge électrique.');
+INSERT INTO Pokemons (nom_pkm, prix, qteStock, description) VALUES ('Pikachu', 2500000, 0 , 'Il lui arrive de remettre d''aplomb un Pikachu allié en lui envoyant une décharge électrique.');
 
 /* ADD USERS */
 /* raw password is 'john' */
@@ -18,10 +18,12 @@ insert into Users values
 insert into Users values
 (2, 'JaneDoe@mail.com', 'EfakNLxyhHy2hVJlxDmVNl1pmgjUZl99gtQ+V3mxSeD8IjeZJ8abnFIpw9QNahwAlEaXBiQUBLXKWRzOmSr8HQ==', 'Doe', 'Jane', '53 Rue des coquelicots, chateauneuf du rhône', '26780','dhMTBkzwDKxnD;4KNs,4ENy', 'ROLE_USER');
 
-/* TODO :  ADD HISTORIQUE 
-INSERT INTO Historiques VALUES (1, 1, 10, '', 1);
-INSERT INTO Historiques VALUES (2, 1, 1, '', 1);
-INSERT INTO Historiques VALUES (3, 2, 6, '', 1); */
+/* TODO :  ADD HISTORIQUE */
+
+/* ADD SHOP CART */
+INSERT INTO Panier VALUES (1, 1, 1);
+INSERT INTO Panier VALUES (2, 1, 1);
+INSERT INTO Panier VALUES (2, 2, 1); 
 
 /* ADD TYPES */
 INSERT INTO Types VALUES ('ACIER','acier');
