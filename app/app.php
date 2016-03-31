@@ -56,7 +56,7 @@ $app['dao.typesPokemons'] = $app->share(function ($app) {
     $typesPokemonsDAO->setPokemonsDAO($app['dao.pokemons']);
     return $typesPokemonsDAO;
 });
-$app['dao.panier'] = $app->share(function ($app) { 
+$app['dao.shop_cart'] = $app->share(function ($app) { 
     $panierDAO = new MillionsPokemons\DAO\PanierDAO($app['db']);
     $panierDAO->setUserDAO($app['dao.users']);
     $panierDAO->setPokemonsDAO($app['dao.pokemons']);                           

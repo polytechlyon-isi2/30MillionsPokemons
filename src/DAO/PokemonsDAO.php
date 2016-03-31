@@ -7,7 +7,7 @@ use MillionsPokemons\Domain\Pokemons;
 
 class PokemonsDAO extends DAO
 {
-    
+
     /**
      * Return a list of all pokemons, sorted by name.
      *
@@ -16,7 +16,7 @@ class PokemonsDAO extends DAO
     public function findAll() {
         $sql = "select * from Pokemons order by nom_pkm desc";
         $result = $this->getDb()->fetchAll($sql);
-        
+
         // Convert query result to an array of domain objects
         $pokemons = array();
         foreach ($result as $row) {
@@ -25,7 +25,7 @@ class PokemonsDAO extends DAO
         }
         return $pokemons;
     }
-    
+
     /**
      * Returns a pokemon matching the supplied id.
      *
@@ -41,6 +41,24 @@ class PokemonsDAO extends DAO
             return $this->buildDomainObject($row);
         else
             throw new \Exception("No Pokemon matching id : " . $id);
+    }
+
+    /**
+     * Update the pokemon.
+     *
+     * @param \MillionsPokemons\Domain\Pokemons $pkm The pokemon to update
+     */
+    public function update(Pokemons $pkm) {
+
+        $pokemonData = array(
+            'idpkm' => $pkm->getId(),
+            'nom_pkm' => $pkm->getName(),
+            'prix' => $pkm->getPrice(),
+            'qteStock' => $pkm->getStock(),
+            'description' => $pkm->getDescription()
+        ); 
+        
+        $this->getDb()->update('Pokemons', $pokemonData, array('idpkm' => $pkm->getId()));
     }
 
     /**
