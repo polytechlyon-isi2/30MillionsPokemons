@@ -187,7 +187,7 @@ $app->get('/shop_cart/{id}', function ($id, Request $request) use ($app) {
 /* Add the selected article in the user shop cart if there is no mistakes.
  * Then display the shop_cart view for the selected user.
  */
-$app->match('/shop_cart/{iduser}/{idpkm}', function($iduser, $idpkm, Request $request) use ($app) {
+$app->match('/shop_cart/add/{iduser}/{idpkm}', function($iduser, $idpkm, Request $request) use ($app) {
 
     $pokemon = $app['dao.pokemons']->find($idpkm);
     $user = $app['dao.users']->find($iduser);
@@ -207,10 +207,56 @@ $app->match('/shop_cart/{iduser}/{idpkm}', function($iduser, $idpkm, Request $re
 
     }  catch (Exception $e) {
 
-        $app['session']->getFlashBag()->add('problem', 'Problème lors de l\'ajout du pokemon dans le panier !');        
+        $app['session']->getFlashBag()->add('problem', 'Problème lors l\'ajout dans le panier !');        
         return $app->redirect($app['url_generator']->generate('shop_cart', array('id' => $iduser)));   
     }
 
     return $app->redirect($app['url_generator']->generate('shop_cart', array('id' => $iduser)));   
 
 })->bind('add_shop_cart');
+
+/* Remove the selected article in the user shop cart (just one).
+ * Then display the shop_cart view for the selected user.
+ * This controller is NEVER used FOR PURCHASE !
+ */
+$app->match('/shop_cart/remove/{iduser}{idpkm}', function($iduser, $idpkm, Request $request) use ($app) {
+
+    $pokemon = $app['dao.pokemons']->find($idpkm);
+    $user = $app['dao.users']->find($iduser);
+
+    $line = $app['dao.shop_cart']->find($user->getId(), $pokemon->getId());
+
+    if($line) {
+
+        $app['dao.shop_cart']->remove($line);
+        
+        //Update the quantity available in the pokemon table
+        $pokemon->setStock($pokemon->getStock() + 1);
+        $app['dao.pokemons']->update($pokemon);
+
+    } else {
+
+        $app['session']->getFlashBag()->add('problem', 'Problème lors de la suppression dans le panier !');   
+    }
+
+    return $app->redirect($app['url_generator']->generate('shop_cart', array('id' => $iduser)));  
+
+})->bind('remove_shop_cart');
+
+/* Remove all articles in the shop cart of the user.
+ * Then display the shop_cart view for the selected user.
+ * This controller is used ONLY FOR PURCHASE ! 
+ */
+$app->match('/shop_cart/removeAll/{iduser}', function($iduser, Request $request) use ($app) {
+
+    $user = $app['dao.users']->find($iduser);
+    $allCartsLine = $app['dao.shop_cart']->findAllByUser($iduser);
+
+    foreach($allCartsLine as $line) {
+        $app['dao.shop_cart']->remove($line);
+    }
+    
+    $app['session']->getFlashBag()->add('success', 'Merci pour votre commande ! Et à très vite !');   
+    return $app->redirect($app['url_generator']->generate('shop_cart', array('id' => $iduser)));  
+
+})->bind('removeAll_shop_cart');
