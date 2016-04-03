@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Choisir une image{% endblock %}
+
+{% block content %}
+
+<form action="" method="post" {{ form_enctype(form) }}>
+    <fieldset>
+        <legend>File Upload</legend>
+        {{ form_widget(form) }}
+    </fieldset>
+    <input type="submit" name="Upload File" />
+</form>
+
+{% endblock %}

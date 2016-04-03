@@ -37,8 +37,12 @@
     {% for line in cartsLine %}
     <div class="panel-body">
         <div class="row">
-            <div class="col-xs-4">
-                <img data-toggle="tooltip" data-placement="bottom" title="{{ line.pkm.name }}"  src="{{ app.request.basepath }}/images/{{ line.pkm.name }}.jpg">
+            <div class="col-xs-4 thumbnail">
+                <a href="{{ path('article', { 'id': line.pkm.id }) }}">
+                    <div class="wrapper">
+                        <img data-toggle="tooltip" data-placement="bottom" title="{{ line.pkm.name }}"  src="{{ app.request.basepath }}/images/{{ line.pkm.name }}.jpg">
+                    </div>
+                </a>
             </div>
             <div class="col-xs-4">
                 <h4 class="product-name"><strong>{{ line.pkm.name }}</strong></h4><h4><small>{{ line.pkm.description }}</small></h4>
@@ -51,9 +55,9 @@
                     <h6><strong> {{ line.qte }} </strong></h6>
                 </div>
                 <div class="col-xs-2">
-                    <button type="button" class="btn btn-link btn-xs">
+                    <a href="{{ path('remove_shop_cart', { 'idpkm': line.pkm.id , 'iduser': app.user.id }) }}" type="button" class="btn btn-link btn-xs">
                         <span class="glyphicon glyphicon-trash"> </span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -64,11 +68,7 @@
     <div class="row">
         <div class="text-center">
             <div class="col-xs-9"></div>
-            <div class="col-xs-3">
-                <button type="button" class="btn btn-default btn-block">
-                    Mettre à jour mon panier
-                </button>
-            </div>
+            <div class="col-xs-3"></div>
         </div>
     </div>
     <br>
@@ -78,9 +78,11 @@
                 <h4 class="text-right">Total <strong>{{ total }} €</strong></h4>
             </div>
             <div class="col-xs-3">
-                <button type="button" class="btn btn-success btn-block">
-                    Valider ma commande
-                </button>
+                <a href="{{ path('removeAll_shop_cart', { 'iduser': app.user.id }) }}">
+                    <button type="button" class="btn btn-success btn-block">
+                        Valider ma commande
+                    </button>
+                </a>
             </div>
         </div>
     </div>

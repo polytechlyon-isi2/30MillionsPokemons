@@ -9,6 +9,7 @@ use MillionsPokemons\Domain\Articles;
 use MillionsPokemons\Domain\Users;
 use MillionsPokemons\Domain\Panier;
 use MillionsPokemons\Form\Type\UserType;
+use MillionsPokemons\Form\Type\ImageType;
 
 /* Home page 
  * Display all categories 
@@ -62,23 +63,25 @@ $app->get('/login', function (Request $request) use ($app) {
  * The default role of the user is "ROLE_USER".
  */
 $app->match('/signUp', function(Request $request) use ($app) {
+
     $user = new Users();
+
     $userForm = $app['form.factory']->create(new UserType(), $user);
 
     $userForm->handleRequest($request);
 
     if ($userForm->isSubmitted() && $userForm->isValid()) {
 
+        /* password */
         $salt = substr(md5(time()), 0, 23);  // generate a random salt value
-
         $user->setSalt($salt);
         $plainPassword = $user->getPassword();
-
         $encoder = $app['security.encoder.digest']; // find the default encoder
         $password = $encoder->encodePassword($plainPassword, $user->getSalt()); // compute the encoded password
-
         $user->setPassword($password); 
-        $user->setRole('ROLE_USER'); // setup the role as user
+
+        /* user role */
+        $user->setRole('ROLE_USER'); 
 
         try {
 
@@ -89,11 +92,12 @@ $app->match('/signUp', function(Request $request) use ($app) {
             $app['security']->setToken($token);
             $app['session']->set('_security_main',serialize($token));
 
-            return $app->redirect($app['url_generator']->generate('home'));
+            return $app->redirect($app['url_generator']->generate('image_add', array('iduser' => $user->getId())));
 
         } catch (Exception $e) {
 
-            $app['session']->getFlashBag()->add('problem', 'Il existe déjà un compte avec cette addresse mail !'); 
+            //'Il existe déjà un compte avec cette addresse mail !'
+            $app['session']->getFlashBag()->add('problem', $e->getMessage()); 
 
             return $app['twig']->render('user_form.html.twig', array(
                 'title' => 'Inscription',
@@ -229,7 +233,7 @@ $app->match('/shop_cart/remove/{iduser}{idpkm}', function($iduser, $idpkm, Reque
     if($line) {
 
         $app['dao.shop_cart']->remove($line);
-        
+
         //Update the quantity available in the pokemon table
         $pokemon->setStock($pokemon->getStock() + 1);
         $app['dao.pokemons']->update($pokemon);
@@ -255,8 +259,50 @@ $app->match('/shop_cart/removeAll/{iduser}', function($iduser, Request $request)
     foreach($allCartsLine as $line) {
         $app['dao.shop_cart']->remove($line);
     }
-    
+
     $app['session']->getFlashBag()->add('success', 'Merci pour votre commande ! Et à très vite !');   
     return $app->redirect($app['url_generator']->generate('shop_cart', array('id' => $iduser)));  
 
 })->bind('removeAll_shop_cart');
+
+/* FOR IMAGES */
+$app->match('/image/{iduser}', function ($iduser, Request $request) use ($app){
+
+    $form = $app['form.factory']
+        ->createBuilder('form')
+        ->add('FileUpload', 'file')
+        ->getForm()
+        ;
+
+    $request = $app['request'];
+    $message = 'Upload a file';
+
+    if ($request->isMethod('POST')) {
+
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $files = $request->files->get($form->getName());
+            /* Make sure that Upload Directory is properly configured and writable */
+            $path = __DIR__.'/../web/images/users/';
+            $filename = $files['FileUpload']->getClientOriginalName();
+            $files['FileUpload']->move($path,$filename);
+
+            //use File System to rename the file. It will be easier to display it in the application
+            $app['dao.fileSystem']->rename($path . $filename, $path . $iduser . ".jpeg");
+
+            return $app->redirect($app['url_generator']->generate('home'));
+        }
+    }
+
+    $response =  $app['twig']->render(
+        'image_form.html.twig', 
+        array(
+            'message' => $message,
+            'form' => $form->createView()
+        )
+    );
+
+    return $response;
+
+})->bind('image_add');
