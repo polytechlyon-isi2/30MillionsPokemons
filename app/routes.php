@@ -166,44 +166,34 @@ $app->match('/user/{id}/edit', function($id, Request $request) use ($app) {
  */
 $app->match('/profil', function (Request $request) use ($app) {
 
-    //image form
-    $form = $app['form.factory']
-        ->createBuilder('form')
-        ->add('FileUpload', 'file')
-        ->getForm()
-        ;
-
-    $request = $app['request'];
+    $imageForm = $userForm = $app['form.factory']->create(new ImageType());
+    $imageForm->handleRequest($request);
 
     //Upload the file selected
-    if ($request->isMethod('POST')) {
 
-        $form->bind($request);
+    if ($imageForm->isSubmitted() && $imageForm->isValid()) {
 
-        if ($form->isValid()) {
+        $files = $request->files->get($imageForm->getName());
+        $path = __DIR__.'/../web/images/users/';
 
-            $files = $request->files->get($form->getName());
-            $path = __DIR__.'/../web/images/users/';
+        //Check if the user has already an image
+        if($app['dao.fileSystem']->exists($path . $app['user']->getId() . ".jpeg")) {
 
-            //Check if the user has already an image
-            if($app['dao.fileSystem']->exists($path . $app['user']->getId() . ".jpeg")) {
+            //delete the old one before upload the new one 
+            $app['dao.fileSystem']->remove($path .  $app['user']->getId() . ".jpeg");
+        } 
 
-                //delete the old one before upload the new one 
-                $app['dao.fileSystem']->remove($path .  $app['user']->getId() . ".jpeg");
-            } 
-            
-            $filename = $files['FileUpload']->getClientOriginalName();
-            $files['FileUpload']->move($path,$filename);
+        $filename = $files['FileUpload']->getClientOriginalName();
+        $files['FileUpload']->move($path,$filename);
 
-            //use File System to rename the file. It will be easier to display it in the application
-            $app['dao.fileSystem']->rename($path . $filename, $path .  $app['user']->getId() . ".jpeg");
+        //use File System to rename the file. It will be easier to display it in the application
+        $app['dao.fileSystem']->rename($path . $filename, $path .  $app['user']->getId() . ".jpeg");
 
-            return $app->redirect($app['url_generator']->generate('profil'));
-        }
+        return $app->redirect($app['url_generator']->generate('profil'));
     }
 
     return $app['twig']->render('user_profil.html.twig', array(
-        'form' => $form->createView()
+        'form' => $imageForm->createView()
     ));
 
 })->bind('profil');
