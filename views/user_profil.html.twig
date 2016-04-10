@@ -5,59 +5,122 @@
 {% block content %}
 
 {% for flashMessage in app.session.flashbag.get('success') %}
-    <div class="alert alert-success">
-        {{ flashMessage }}
-    </div>
+<div class="alert alert-success">
+    {{ flashMessage }}
+</div>
 {% endfor %}
 
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <h3 class="panel-title">{{ app.user.firstname }} {{ app.user.name }}</h3>
-        </div>
-        <div class="panel-body">
-          <div class="row">
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ app.user.firstname }} {{ app.user.name }}</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
             <div class="col-md-3 col-lg-3 thumbnail" align="center">
                 <img title="{{ app.user.name }}"  src="{{ app.request.basepath }}/images/users/{{ app.user.id }}.jpeg">
+                <br>
+                <a  href="{{ path('profil') }}" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#image_modal"><span class="glyphicon glyphicon-share"></span> Mettre à jour ma photo de profil</a>
             </div>
 
             <div class=" col-md-9 col-lg-9 "> 
-              <table class="table table-user-information">
-                <tbody>
-                  <tr>
-                    <td>Identificateur du compte :</td>
-                    <td>{{ app.user.id }}</td>
-                  </tr>
-                  <tr>
-                    <td>Adresse mail (login) :</td>
-                    <td>{{ app.user.username }}</td>
-                  </tr>
-                  <tr>
-                    <td> Nom :</td>
-                    <td>{{ app.user.name }}</td>
-                  </tr>
-                    <tr>
-                    <td> Prénom :</td>
-                      <td> {{ app.user.firstname }}</td>
-                    </tr>
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>
+                            <td>Identificateur du compte :</td>
+                            <td>{{ app.user.id }}</td>
+                        </tr>
+                        <tr>
+                            <td>Adresse mail (login) :</td>
+                            <td>{{ app.user.username }}</td>
+                        </tr>
+                        <tr>
+                            <td> Nom :</td>
+                            <td>{{ app.user.name }}</td>
+                        </tr>
+                        <tr>
+                            <td> Prénom :</td>
+                            <td> {{ app.user.firstname }}</td>
+                        </tr>
 
-                     <tr>
-                         <tr>
-                    <td>Adresse : </td>
-                    <td>{{ app.user.adress }}</td>
-                  </tr>
-                    <tr>
-                    <td>Code Postal :</td>
-                    <td>{{ app.user.postCode }}</td>
-                  </tr>
+                        <tr>
+                        <tr>
+                            <td>Adresse : </td>
+                            <td>{{ app.user.adress }}</td>
+                        </tr>
+                        <tr>
+                            <td>Code Postal :</td>
+                            <td>{{ app.user.postCode }}</td>
+                        </tr>
 
-                </tbody>
-              </table>
+                    </tbody>
+                </table>
             </div>
-          </div>
-            <span class="pull-right">
-                <a href="{{ path('user_edit', { 'id': app.user.id }) }}" data-toggle="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier mon profil" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-            </span>
         </div>
-      </div>
-    
+        <span class="pull-right">
+            <a href="{{ path('user_edit', { 'id': app.user.id }) }}" data-toggle="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier mon profil" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+        </span>
+    </div>
+</div>
+
+
+<div class="modal fade" id="image_modal" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">
+                    Mettre à jour votre photo de profil
+                </h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+
+                <form id="image_form" action="" method="post" {{ form_enctype(form) }}>
+                    <fieldset>
+                        <legend>Télécharger un fichier :</legend>
+                        {{ form_widget(form) }}
+                    </fieldset>
+                    <input type="submit" name="Upload File" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $('#image_form').submit(function(e) {
+
+        var form = $(this);
+        var formdata = false;
+        if(window.FormData){
+            formdata = new FormData(form[0]);
+        }
+
+        var formAction = form.attr('action');
+        var path = "{{ path('profil') }}";
+
+        $.ajax({
+            type        : 'POST',
+            url         : path,
+            cache       : false,
+            data        : formdata ? formdata : form.serialize(),
+            contentType : false,
+            processData : false,
+
+            success: function(response) {
+                if(response != 'error') {
+                    $('#messages').addClass('alert alert-success').text(response);
+                    // OP requested to close the modal
+                    //$('#myModal').modal('hide');
+                } else {
+                    $('#messages').addClass('alert alert-danger').text(response);
+                }
+            }
+        });
+        e.preventDefault();
+    });
+</script>
 {% endblock %}

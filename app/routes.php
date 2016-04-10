@@ -92,7 +92,7 @@ $app->match('/signUp', function(Request $request) use ($app) {
             $app['security']->setToken($token);
             $app['session']->set('_security_main',serialize($token));
 
-            return $app->redirect($app['url_generator']->generate('image_add', array('iduser' => $user->getId())));
+            return $app->redirect($app['url_generator']->generate('profil'));
 
         } catch (Exception $e) {
 
@@ -165,7 +165,35 @@ $app->match('/user/{id}/edit', function($id, Request $request) use ($app) {
  */
 $app->get('/profil', function (Request $request) use ($app) {
 
-    return $app['twig']->render('user_profil.html.twig', array());
+    // image form
+    $form = $app['form.factory']
+        ->createBuilder('form')
+        ->add('FileUpload', 'file')
+        ->getForm()
+        ;
+
+    $request = $app['request'];
+
+    if ($request->isMethod('POST')) {
+
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $files = $request->files->get($form->getName());
+            /* Make sure that Upload Directory is properly configured and writable */
+            $path = __DIR__.'/../web/images/users/';
+            $filename = $files['FileUpload']->getClientOriginalName();
+            $files['FileUpload']->move($path,$filename);
+
+            //use File System to rename the file. It will be easier to display it in the application
+            $app['dao.fileSystem']->rename($path . $filename, $path . $iduser . ".jpeg");
+
+            return $app->redirect($app['url_generator']->generate('home'));
+        }
+    }
+
+    return $app['twig']->render('user_profil.html.twig', array(
+                "form" => $form->createView()));
 
 })->bind('profil');
 
@@ -268,41 +296,6 @@ $app->match('/shop_cart/removeAll/{iduser}', function($iduser, Request $request)
 /* FOR IMAGES */
 $app->match('/image/{iduser}', function ($iduser, Request $request) use ($app){
 
-    $form = $app['form.factory']
-        ->createBuilder('form')
-        ->add('FileUpload', 'file')
-        ->getForm()
-        ;
 
-    $request = $app['request'];
-    $message = 'Upload a file';
-
-    if ($request->isMethod('POST')) {
-
-        $form->bind($request);
-
-        if ($form->isValid()) {
-            $files = $request->files->get($form->getName());
-            /* Make sure that Upload Directory is properly configured and writable */
-            $path = __DIR__.'/../web/images/users/';
-            $filename = $files['FileUpload']->getClientOriginalName();
-            $files['FileUpload']->move($path,$filename);
-
-            //use File System to rename the file. It will be easier to display it in the application
-            $app['dao.fileSystem']->rename($path . $filename, $path . $iduser . ".jpeg");
-
-            return $app->redirect($app['url_generator']->generate('home'));
-        }
-    }
-
-    $response =  $app['twig']->render(
-        'image_form.html.twig', 
-        array(
-            'message' => $message,
-            'form' => $form->createView()
-        )
-    );
-
-    return $response;
 
 })->bind('image_add');
