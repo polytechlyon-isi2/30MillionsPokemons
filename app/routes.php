@@ -181,9 +181,17 @@ $app->match('/profil', function (Request $request) use ($app) {
         $form->bind($request);
 
         if ($form->isValid()) {
+
             $files = $request->files->get($form->getName());
-            /* Make sure that Upload Directory is properly configured and writable */
             $path = __DIR__.'/../web/images/users/';
+
+            //Check if the user has already an image
+            if($app['dao.fileSystem']->exists($path . $app['user']->getId() . ".jpeg")) {
+
+                //delete the old one before upload the new one 
+                $app['dao.fileSystem']->remove($path .  $app['user']->getId() . ".jpeg");
+            } 
+            
             $filename = $files['FileUpload']->getClientOriginalName();
             $files['FileUpload']->move($path,$filename);
 
@@ -193,7 +201,7 @@ $app->match('/profil', function (Request $request) use ($app) {
             return $app->redirect($app['url_generator']->generate('profil'));
         }
     }
-    
+
     return $app['twig']->render('user_profil.html.twig', array(
         'form' => $form->createView()
     ));
