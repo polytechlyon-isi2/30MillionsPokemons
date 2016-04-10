@@ -4,25 +4,12 @@
 
 {% block content %}
 
-<div id="form-content" class="modal hide fade in" style="display: none;">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal">×</a>
-        <h3>Sélectionner votre image de profil !</h3>
-    </div>
-    <div class="modal-body">
-        <form action="" method="post" {{ form_enctype(form) }}>
-            <fieldset>
-                <legend>Fichier à télécharger : </legend>
-                {{ form_widget(form) }}
-            </fieldset>
-            <input type="submit" name="Télécharger ce fichier" />
-        </form>
-    </div>
-    <div class="modal-footer">
-        <input class="btn btn-success" type="submit" value="Envoyé !" id="submit">
-        <a href="#" class="btn" data-dismiss="modal">Echec du téléchargement. Essayez avec une autre photo.</a>
-    </div>
-</div>
-<div id="thanks"><p><a data-toggle="modal" href="#form-content" class="btn btn-primary btn-large">Modal powers, activate!</a></p></div>
+<form action="" method="post" {{ form_enctype(form) }}>
+    <fieldset>
+        <legend>File Upload</legend>
+        {{ form_widget(form) }}
+    </fieldset>
+    <input type="submit" name="Upload File" />
+</form>
 
 {% endblock %}
