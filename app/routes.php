@@ -183,8 +183,8 @@ $app->match('/profil', function (Request $request) use ($app) {
             $app['dao.fileSystem']->remove($path .  $app['user']->getId() . ".jpeg");
         } 
 
-        $filename = $files['FileUpload']->getClientOriginalName();
-        $files['FileUpload']->move($path,$filename);
+        $filename = $files['fileUpload']->getClientOriginalName();
+        $files['fileUpload']->move($path,$filename);
 
         //use File System to rename the file. It will be easier to display it in the application
         $app['dao.fileSystem']->rename($path . $filename, $path .  $app['user']->getId() . ".jpeg");

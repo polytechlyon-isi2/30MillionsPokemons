@@ -84,12 +84,14 @@
             <!-- Modal Body -->
             <div class="modal-body">
 
-                <form action="" method="post" {{ form_enctype(form) }}>
-                    <fieldset>
-                        {{ form_widget(form) }}
-                    </fieldset>
-                    <input type="submit" name="Upload File" />
-                </form>
+                {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        {{ form_widget(form.fileUpload) }}
+                    </div>
+                </div>
+                <input type="submit" name="Upload File" />
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
