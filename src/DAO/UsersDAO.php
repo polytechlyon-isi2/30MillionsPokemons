@@ -69,7 +69,7 @@ class UsersDAO extends DAO implements UserProviderInterface
             'postCode' => $user->getPostCode(),
             'salt' => $user->getSalt(),
             'admin' => $user->getRole()
-            );
+        );
 
         if ($user->getId()) {
             // The user has already been saved : update it

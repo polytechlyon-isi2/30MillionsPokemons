@@ -57,7 +57,7 @@ class PokemonsDAO extends DAO
             'qteStock' => $pkm->getStock(),
             'description' => $pkm->getDescription()
         ); 
-        
+
         $this->getDb()->update('Pokemons', $pokemonData, array('idpkm' => $pkm->getId()));
     }
 

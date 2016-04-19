@@ -25,20 +25,20 @@
             <p>{{ details.getDescription }}</p>
             <br>
             <div class="row">
-                
+
                 {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
-                
-                    {% if details.getStock == 0 %}
-                
-                        <div class="alert alert-danger">
-                            <strong>Ce Pokemon est victime de son succès : Rupture de stock !</strong>
-                        </div>
-    
-                    {% else %}
-                
-                        <a href="{{ path('add_shop_cart', { 'iduser': app.user.id, 'idpkm': details.id }) }}" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Ajouter au panier (Quantité en stock : {{ details.getStock }})</a>
-                
-                    {% endif %}
+
+                {% if details.getStock == 0 %}
+
+                <div class="alert alert-danger">
+                    <strong>Ce Pokemon est victime de son succès : Rupture de stock !</strong>
+                </div>
+
+                {% else %}
+
+                <a href="{{ path('add_shop_cart', { 'iduser': app.user.id, 'idpkm': details.id }) }}" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Ajouter au panier (Quantité en stock : {{ details.getStock }})</a>
+
+                {% endif %}
 
                 {% else %}
 

@@ -18,7 +18,7 @@ class TypesPokemons
      * @var \MillionsPokemons\Domain\Types
      */
     private $type;
-    
+
     public function getPkm() {
         return $this->pkm;
     }

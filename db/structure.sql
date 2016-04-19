@@ -36,23 +36,6 @@ REFERENCES Pokemons(idpkm),
 REFERENCES Users(idUser)
 ) engine=innodb character set utf8 collate utf8_unicode_ci;
 
-/* TODO : fix historiques db 
-create table Historiques (
-    historiqueId integer not null auto_increment,
-    login varchar(100) not null,
-    idpkm integer not null,
-    dateAchat date not null,
-    qteAchat integer not null,
-    // >> Just historiqueId as Primary key ??? 
-    PRIMARY KEY (historiqueId, login, idpkm, dateAchat),
-    CONSTRAINT fk_loginHisto FOREIGN KEY (login)
-REFERENCES Users(login),
-    CONSTRAINT fk_idpkmHisto FOREIGN KEY (idpkm)
-REFERENCES Pokemons(idpkm)
-) engine=innodb character set utf8 collate utf8_unicode_ci;
-
-*/
-
 create table Types (
     codeType varchar(100) not null primary key,
     type varchar(100)

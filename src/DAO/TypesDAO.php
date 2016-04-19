@@ -7,7 +7,7 @@ use MillionsPokemons\Domain\Types;
 
 class TypesDAO extends DAO
 {
-    
+
     /**
      * Return a list of all category, sorted by name.
      *
@@ -16,7 +16,7 @@ class TypesDAO extends DAO
     public function findAll() {
         $sql = "select * from Types order by type";
         $result = $this->getDb()->fetchAll($sql);
-        
+
         $types = array();
         foreach ($result as $row) {
             $codeType = $row['codeType'];
@@ -24,8 +24,8 @@ class TypesDAO extends DAO
         }
         return $types;
     }
-    
-     /**
+
+    /**
      * Returns a type matching the supplied codeType.
      *
      * @param string $codeType

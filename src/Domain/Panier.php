@@ -18,18 +18,18 @@ class Panier
      * @var \MillionsPokemons\Domain\Users
      */
     private $user;
-    
+
     /**
      * Quantity
      *
      * @var integer
      */
     private $qte;
-    
+
     //todo : add date
     //todo : pokemon.name au lieu de pokemon.getName dans twig
     //todo : rename panier as commandeProduit
-    
+
     public function getPkm() {
         return $this->pkm;
     }
@@ -45,11 +45,11 @@ class Panier
     public function setUser($user) {
         $this->user = $user;
     }
-    
+
     public function getQte() {
         return $this->qte;
     }
-    
+
     public function setQte($qte) {
         $this->qte = $qte;
     }

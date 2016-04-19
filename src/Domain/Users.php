@@ -12,7 +12,7 @@ class Users implements UserInterface
      * @var integer
      */
     private $idUser;
-    
+
     /**
      * User username. It's an adress mail.
      *
@@ -26,36 +26,36 @@ class Users implements UserInterface
      * @var string
      */
     private $mdp;
-    
-     /**
+
+    /**
      * User name
      *
      * @var string
      */
     private $name;
-    
-     /**
+
+    /**
      * User firstname
      *
      * @var string
      */
     private $firstname;
-    
-     /**
+
+    /**
      * User adress
      *
      * @var string
      */
     private $adress;
-    
-     /**
+
+    /**
      * User postCode
      *
      * @var string
      */
     private $postCode;
-    
-     /**
+
+    /**
      * Salt that was originally used to encode the password.
      *
      * @var string
@@ -99,7 +99,7 @@ class Users implements UserInterface
     public function setPassword($password) {
         $this->mdp = $password;
     }
-    
+
     public function getName() {
         return $this->name;
     }
@@ -107,7 +107,7 @@ class Users implements UserInterface
     public function setName($name) {
         $this->name = $name;
     }
-    
+
     public function getFirstname() {
         return $this->firstname;
     }
@@ -115,7 +115,7 @@ class Users implements UserInterface
     public function setFirstname($firstname) {
         $this->firstname = $firstname;
     }
-    
+
     public function getAdress() {
         return $this->adress;
     }
@@ -123,7 +123,7 @@ class Users implements UserInterface
     public function setAdress($adress) {
         $this->adress = $adress;
     }
-    
+
     public function getPostCode() {
         return $this->postCode;
     }
@@ -139,7 +139,7 @@ class Users implements UserInterface
     {
         return $this->salt;
     }
-    
+
     public function setSalt($salt) {
         $this->salt = $salt;
     }
@@ -152,7 +152,7 @@ class Users implements UserInterface
     public function setRole($role) {
         $this->role = $role;
     }
-    
+
     /**
      * @inheritDoc
      */

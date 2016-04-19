@@ -24,22 +24,22 @@ class Pokemons
      * @var double
      */
     private $pricepkm;
-    
-     /**
+
+    /**
      * Pokemon stock
      *
      * @var integer
      */
     private $qteStockpkm;
-    
-     /**
+
+    /**
      * Pokemon description
      *
      * @var string
      */
     private $descriptionpkm;
 
-    
+
     public function getId() {
         return $this->idpkm;
     }
@@ -63,7 +63,7 @@ class Pokemons
     public function setPrice($price) {
         $this->pricepkm = $price;
     }
-    
+
     public function getStock() {
         return $this->qteStockpkm;
     }
@@ -71,7 +71,7 @@ class Pokemons
     public function setStock($stock) {
         $this->qteStockpkm = $stock;
     }
-    
+
     public function getDescription() {
         return $this->descriptionpkm;
     }

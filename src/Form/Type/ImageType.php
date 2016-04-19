@@ -12,7 +12,7 @@ class ImageType extends AbstractType
         $builder
             ->add('fileUpload', 'file');
     }
-    
+
     public function getName()
     {
         return 'image';

@@ -96,12 +96,10 @@ $app->match('/signUp', function(Request $request) use ($app) {
 
         } catch (Exception $e) {
 
-            //'Il existe déjà un compte avec cette addresse mail !'
-            $app['session']->getFlashBag()->add('problem', $e->getMessage()); 
+            $app['session']->getFlashBag()->add('problem', 'Il existe déjà un compte avec cette addresse mail !'); 
 
             return $app['twig']->render('user_form.html.twig', array(
                 'title' => 'Inscription',
-                'error' => $e->getMessage(),
                 'userForm' => $userForm->createView()));
         }
     }
@@ -149,7 +147,6 @@ $app->match('/user/{id}/edit', function($id, Request $request) use ($app) {
 
             return $app['twig']->render('user_form.html.twig', array(
                 'title' => 'Inscription',
-                'error' => $e->getMessage(),
                 'userForm' => $userForm->createView()));
         }
     }
@@ -170,7 +167,6 @@ $app->match('/profil', function (Request $request) use ($app) {
     $imageForm->handleRequest($request);
 
     //Upload the file selected
-
     if ($imageForm->isSubmitted() && $imageForm->isValid()) {
 
         $files = $request->files->get($imageForm->getName());
@@ -186,7 +182,7 @@ $app->match('/profil', function (Request $request) use ($app) {
         $filename = $files['fileUpload']->getClientOriginalName();
         $files['fileUpload']->move($path,$filename);
 
-        //use File System to rename the file. It will be easier to display it in the application
+        //Use File System to rename the file. It will be easier to display it in the application
         $app['dao.fileSystem']->rename($path . $filename, $path .  $app['user']->getId() . ".jpeg");
 
         return $app->redirect($app['url_generator']->generate('profil'));

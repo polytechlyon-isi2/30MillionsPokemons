@@ -18,11 +18,9 @@ insert into Users values
 insert into Users values
 (2, 'JaneDoe@mail.com', 'EfakNLxyhHy2hVJlxDmVNl1pmgjUZl99gtQ+V3mxSeD8IjeZJ8abnFIpw9QNahwAlEaXBiQUBLXKWRzOmSr8HQ==', 'Doe', 'Jane', '53 Rue des coquelicots, chateauneuf du rhône', '26780','dhMTBkzwDKxnD;4KNs,4ENy', 'ROLE_USER');
 
-/* TODO :  ADD HISTORIQUE */
-
 /* ADD SHOP CART */
 INSERT INTO Panier VALUES (1, 1, 1);
-INSERT INTO Panier VALUES (2, 1, 1);
+INSERT INTO Panier VALUES (1, 2, 1);
 INSERT INTO Panier VALUES (2, 2, 1); 
 
 /* ADD TYPES */

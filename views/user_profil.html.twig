@@ -4,6 +4,12 @@
 
 {% block content %}
 
+{% for flashMessage in app.session.flashbag.get('success') %}
+<div class="alert alert-success">
+    {{ flashMessage }}
+</div>
+{% endfor %}
+
 <div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">{{ app.user.firstname }} {{ app.user.name }}</h3>

@@ -73,10 +73,10 @@ class PanierDAO extends DAO
     public function save(Panier $line) {
 
         $matchingLine = $this->find($line->getUser()->getId(), $line->getPkm()->getId());
-        
+
         if($matchingLine) {
-            
-             // The pokemon has already been saved : update the quantity
+
+            // The pokemon has already been saved : update the quantity
             $lineData = array(
                 'iduser' => $line->getUser()->getId(),
                 'idpkm' => $line->getPkm()->getId(),
@@ -85,7 +85,7 @@ class PanierDAO extends DAO
             $this->getDb()->update('Panier', $lineData, array('idUser' => $line->getUser()->getId(),
                                                               'idPkm' => $line->getPkm()->getId()));
         } else {
-            
+
             // The pokemon has never been saved in shop_cart for that user : insert it
             $lineData = array(
                 'iduser' => $line->getUser()->getId(),
@@ -95,16 +95,16 @@ class PanierDAO extends DAO
             $this->getDb()->insert('Panier', $lineData);
         }
     }
-    
+
     /**
      * Removes a line from the shop cart.
      *
      * @param Panier $line The line to delete.
      */
     public function remove(Panier $line) {
-        
+
         if($line->getQte() > 1) {
-            
+
             /* Delete just one pokemon of the cart : so update quantity */
             $lineData = array(
                 'iduser' => $line->getUser()->getId(),
@@ -114,9 +114,9 @@ class PanierDAO extends DAO
             $this->getDb()->update('Panier', $lineData, array('idUser' => $line->getUser()->getId(),
                                                               'idPkm' => $line->getPkm()->getId()));
         } else {
-            
+
             $this->getDb()->delete('Panier', array('idUser' => $line->getUser()->getId(),
-                                              'idPkm' => $line->getPkm()->getId()));            
+                                                   'idPkm' => $line->getPkm()->getId()));            
         }        
     }
 

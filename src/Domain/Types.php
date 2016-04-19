@@ -18,7 +18,7 @@ class Types
      * @var string
      */
     private $type;
-    
+
     public function getCodeType() {
         return $this->codeType;
     }

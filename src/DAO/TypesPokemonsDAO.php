@@ -7,12 +7,12 @@ use MillionsPokemons\Domain\TypesPokemons;
 
 class TypesPokemonsDAO extends DAO
 {
-    
+
     /**
      * @var \MillionsPokemons\DAO\Pokemons
      */
     private $pokemonDAO;
-    
+
     /**
      * @var \MillionsPokemons\DAO\Types
      */
@@ -21,11 +21,11 @@ class TypesPokemonsDAO extends DAO
     public function setPokemonsDAO(PokemonsDAO $pokemonDAO) {
         $this->pokemonDAO = $pokemonDAO;
     }
-    
+
     public function setTypeDAO(TypesDAO $typeDAO) {
         $this->typeDAO = $typeDAO;
     }
-    
+
     /**
      * Return a list of all pokemons for a selected Type.
      *
@@ -48,8 +48,8 @@ class TypesPokemonsDAO extends DAO
         }
         return $allPokemons;
     }
-    
-     /**
+
+    /**
      * Return a list of all types for a selected pokemon.
      *
      * @param integer $idpkm The pokemon.
@@ -80,13 +80,13 @@ class TypesPokemonsDAO extends DAO
             $pkm = $this->pokemonDAO->find($idpkm);
             $typePokemon->setPkm($pkm);
         }
-        
+
         if (array_key_exists('codeType', $row)) {
             $codeType = $row['codeType'];
             $type = $this->typeDAO->find($codeType);
             $typePokemon->setType($type);
         }
-        
+
         return $typePokemon;
     }
 }
