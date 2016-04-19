@@ -18,7 +18,7 @@ $app->get('/', function () use ($app) {
 
     $types = $app['dao.types']->findAll();
 
-    return $app['twig']->render('index.html.twig', array('categories' => $types));
+    return $app['twig']->render('home.html.twig', array('categories' => $types));
 
 })->bind('home');
 
@@ -30,7 +30,7 @@ $app->get('/category/{id}', function ($id) use ($app) {
     $allPokemons = $app['dao.typesPokemons']->findAllByType($id);
     $category = $app['dao.types']->find($id);
 
-    return $app['twig']->render('category.html.twig', array('articles' => $allPokemons, 'category' => $category));
+    return $app['twig']->render('pokemon_categories.html.twig', array('articles' => $allPokemons, 'category' => $category));
 
 })->bind('category');
 
@@ -42,7 +42,7 @@ $app->get('/article/{id}', function ($id) use ($app) {
     $aPokemon = $app['dao.pokemons']->find($id);
     $pokemonTypes = $app['dao.typesPokemons']->findAllByPokemon($id);
 
-    return $app['twig']->render('article.html.twig', array('details' => $aPokemon, 'types' => $pokemonTypes));
+    return $app['twig']->render('pokemon_details.html.twig', array('details' => $aPokemon, 'types' => $pokemonTypes));
 
 })->bind('article');
 
@@ -51,7 +51,7 @@ $app->get('/article/{id}', function ($id) use ($app) {
  */
 $app->get('/login', function (Request $request) use ($app) {
 
-    return $app['twig']->render('connection.html.twig', array(
+    return $app['twig']->render('user_login.html.twig', array(
         'error'         => $app['security.last_error']($request),
         'last_username' => $app['session']->get('_security.last_username'),));
 

@@ -23,6 +23,7 @@
             <div class="row col-sm-12">
                 <nav class="col-sm-2">
                     <ul class="nav nav-pills nav-stacked">
+                        <br>
                         {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li> <a href="{{ path('profil') }}"><span class="glyphicon glyphicon-user"></span> Mon profil</a> </li>
                         <li> <a href="{{ path('shop_cart', { 'id': app.user.getId }) }}"> <span class="glyphicon glyphicon-shopping-cart"></span> Mon panier</a> </li>
@@ -33,14 +34,14 @@
                             </ul>
                         </li>
                         {% else %}
-                            <li class="dropdown">
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="glyphicon glyphicon-user"></span> Non connecté <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{{ path('login') }}">Se Connecter</a></li>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('login') }}">Se Connecter</a></li>
                                 <li><a href="{{ path('user_add') }}">S'Inscrire</a></li>
-                                </ul>
-                            </li>
+                            </ul>
+                        </li>
                         {% endif %}
                     </ul>
                 </nav>
@@ -48,22 +49,23 @@
                 <section class="col-sm-10">
                     <div class="text-center">
                         {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <h5>Bienvenue, {{ app.user.getFirstname }} !</h5>
+                        <h5>Bienvenue, {{ app.user.getFirstname }} !</h5>
                         {% endif %}
+                        <br>
+                        {% block error %}{% endblock %}
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             {% block title %}{% endblock %}
                         </div>
-                        </div>
-                        <div class="panel-body">
-                            {% block content %}{% endblock %}
-                        </div>
-                        <div class="panel-footer">
-                            {% block footer %}{% endblock %}
-                        </div>
-                        <br><br>
                     </div>
+                    <div class="panel-body">
+                        {% block content %}{% endblock %}
+                    </div>
+                    <div class="panel-footer">
+                        {% block footer %}{% endblock %}
+                    </div>
+                    <br><br>
                 </section>
 
                 <section class="footer">
@@ -75,11 +77,11 @@
                         </div>
                     </div>
                 </section>
-            </div>
-        </div> 
+            </div> 
+        </div>
 
-    <script src="{{ app.request.basepath }}/lib/jquery/jquery.min.js"></script>
-    <script src="{{ app.request.basepath }}/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="{{ app.request.basepath }}/lib/jquery/jquery.min.js"></script>
+        <script src="{{ app.request.basepath }}/lib/bootstrap/js/bootstrap.min.js"></script>
 
     </body>
 </html>

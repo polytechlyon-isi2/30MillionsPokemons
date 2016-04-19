@@ -1,14 +1,8 @@
-{% extends 'layout.html.twig' %}
+{% extends 'error.html.twig' %}
 
 {% block title %} Détails de votre compte {% endblock %}
 
 {% block content %}
-
-{% for flashMessage in app.session.flashbag.get('success') %}
-<div class="alert alert-success">
-    {{ flashMessage }}
-</div>
-{% endfor %}
 
 <div class="panel panel-info">
     <div class="panel-heading">

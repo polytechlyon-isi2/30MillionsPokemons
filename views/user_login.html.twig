@@ -1,13 +1,8 @@
-{% extends 'layout.html.twig' %}
+{% extends 'error.html.twig' %}
 
 {% block title %}Connection & Inscription{% endblock %}
 
 {% block content %}
-{% if error %}
-<div class="alert alert-danger">
-    <strong>Echec de l'authentification ! Vérifiez votre mail et/ou votre mot de passe.</strong>
-</div>
-{% endif %}
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">

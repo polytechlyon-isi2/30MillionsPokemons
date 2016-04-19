@@ -1,0 +1,23 @@
+{% extends 'backbutton.html.twig' %}
+
+{% block error %}
+
+{% for flashMessage in app.session.flashbag.get('problem') %}
+<div class="alert alert-danger">
+    {{ flashMessage }}
+</div>
+{% endfor %}
+
+{% if error is defined and error %}
+<div class="alert alert-danger">
+    <strong>Echec de l'authentification ! Vérifiez votre mail et/ou votre mot de passe.</strong>
+</div>
+{% endif %}
+
+{% if userForm is defined and form_errors(userForm.password.first) %}
+<div class="alert alert-danger">
+    {{ form_errors(userForm.password.first) }}
+</div>
+{% endif %}
+
+{% endblock %}
