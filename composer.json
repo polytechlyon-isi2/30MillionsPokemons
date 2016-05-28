@@ -10,7 +10,6 @@
         "symfony/config": "2.7.*",
         "twig/extensions": "1.3.*",
         "symfony/validator": "2.7.*",
-        /* For images */
         "symfony/locale": "~2.2",
         "symfony/filesystem": "2.3.*" 
     },
